@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primárias -->
+    <color name="colorPrimary">#83def8</color> <!-- Azul destaque do projeto -->
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <!-- Fundo -->
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorOnBackground">#000000</color>
+    <!-- Header / BottomNav -->
+    <color name="colorHeader">#000000</color>
+    <color name="colorOnHeader">#FFFFFF</color>
+    <!-- Superfícies (cards, botões pretos) -->
+    <color name="colorSurface">#000000</color>
+    <color name="colorOnSurface">#FFFFFF</color>
+    <!-- Texto secundário -->
+    <color name="colorSecondaryText">#E0E0E0</color>
+    <!-- Erro -->
+    <color name="colorError">#B00020</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <!-- Textos de EditText -->
+    <color name="colorInputText">#666666</color> <!-- texto digitado -->
+    <color name="colorInputHint">#A0A0A0</color> <!-- hint/texto placeholder -->
+</resources>

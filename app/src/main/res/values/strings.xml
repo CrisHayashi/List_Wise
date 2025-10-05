@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">List Wise</string>
+    <string name="listwise_image_description">Logo do aplicativo</string>
+    <string name="enter_text">Login</string>
+    <string name="cadastro_text">Cadastro</string>
+    <string name="login_prompt">E-mail</string>
+    <string name="password_prompt">Senha</string>
+    <string name="forgot_password_text">Esqueceu a senha?</string>
+    <string name="login_button">Login</string>
+    <string name="or_text">ou</string>
+    <string name="google_img_desc">Ícone do Google</string>
+    <string name="login_google_text">Entrar com Google</string>
+    <string name="create_account_text">Não tem conta?</string>
+    <string name="create_account_btn">Criar Conta</string>
+    <string name="my_image_description">Logo do rodapé</string>
+    <string name="itech_inspirationalTech">inspirational Tech</string>
+    <string name="desc_nav_list">Abrir listas</string>
+    <string name="desc_nav_cart">Abrir carrinho</string>
+    <string name="desc_nav_alarm">Abrir histórico</string>
+    <string name="desc_nav_location">Abrir localização</string>
+    <string name="desc_nav_settings">Abrir configurações</string>
+    <string name="btn_create_list">Criar Lista</string>
+    <string name="btn_wishlist">Listas Desejadas</string>
+    <string name="btn_purchased">Listas Compradas</string>
+    <string name="developing_screen_message">Tela em desenvolvimento</string>
+
+    <!-- Mensagens -->
+    <string name="login_success_message">Login realizado com sucesso!</string>
+    <string name="login_error_message">Usuário ou senha incorretos.</string>
+    <string name="login_empty_message">Preencha todos os campos.</string>
+    <string name="cadastro_error_message">Por favor, preencha todos os campos.</string>
+    <string name="login_found_message">Já existe um usuário com este e-mail.</string>
+    <string name="cadastro_success_message">Cadastro realizado com sucesso!</string>
+</resources>

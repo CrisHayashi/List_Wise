@@ -1,0 +1,13 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Bordas arredondadas -->
+    <corners android:radius="12dp" />
+
+    <!-- Fundo preto (do tema, não do sistema) -->
+    <solid android:color="@color/colorSurface"/>
+
+    <!-- Borda preta (do tema também) -->
+    <stroke android:width="2dp" android:color="@color/colorSurface"/>
+
+</shape>

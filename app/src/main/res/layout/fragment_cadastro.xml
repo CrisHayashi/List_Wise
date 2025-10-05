@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_login_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSurface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="28dp">
+
+        <!-- Logo -->
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/listwise_logo"
+            android:contentDescription="@string/listwise_image_description" />
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastro_text"
+            android:textColor="@color/colorPrimary"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:gravity="start" />
+
+        <!-- Email -->
+        <EditText
+            android:id="@+id/txtLoginPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_prompt"
+            android:textColor="@color/colorInputText"
+            android:textColorHint="@color/colorInputHint"
+            android:drawableStart="@drawable/ico_email"
+            android:drawablePadding="10dp"
+            android:inputType="textEmailAddress"
+            android:autofillHints="username"
+            android:layout_marginTop="16dp" />
+
+        <!-- Password -->
+        <EditText
+            android:id="@+id/txtPasswordPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_prompt"
+            android:textColor="@color/colorInputText"
+            android:textColorHint="@color/colorInputHint"
+            android:drawableStart="@drawable/ico_password"
+            android:drawablePadding="10dp"
+            android:inputType="textPassword"
+            android:autofillHints="password"
+            android:layout_marginTop="16dp" />
+
+        <!-- Esqueci senha -->
+        <TextView
+            android:id="@+id/txtForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_password_text"
+            android:layout_marginTop="2dp"
+            android:gravity="end" />
+
+        <!-- Botão Login -->
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/login_button"
+            style="@style/BotaoAzul"
+            app:layout_constraintWidth_percent="0.8"
+            android:layout_marginTop="24dp" />
+
+        <!-- Texto OR -->
+        <TextView
+            android:id="@+id/txtOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or_text"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center" />
+
+        <!-- Login Google -->
+        <LinearLayout
+            android:id="@+id/btnGoogleLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/rounded_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="12dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ico_google16_foreground"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/google_img_desc" />
+
+            <TextView
+                android:id="@+id/btnGoogleLoginText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_google_text"
+                android:textColor="@color/colorOnSurface"
+                android:textStyle="bold"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Criar conta -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtCreatAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_account_text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/btnCreatAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_account_btn"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:paddingStart="4dp" />
+        </LinearLayout>
+
+        <!-- Footer -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="bottom|center_horizontal"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:id="@+id/imgFooter"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/itech"
+                android:contentDescription="@string/my_image_description" />
+
+            <TextView
+                android:id="@+id/txtFooter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/itech_inspirationalTech"
+                android:textSize="11sp"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/listFragment"
+        android:icon="@drawable/ico_list"
+        android:title="@string/desc_nav_list"/>
+    <item
+        android:id="@+id/shoppingFragment"
+        android:icon="@drawable/ico_cart"
+        android:title="@string/desc_nav_cart"/>
+    <item
+        android:id="@+id/historicFragment"
+        android:icon="@drawable/ico_alarm"
+        android:title="@string/desc_nav_alarm"/>
+    <item
+        android:id="@+id/storeLocatorFragment"
+        android:icon="@drawable/ico_location"
+        android:title="@string/desc_nav_location"/>
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ico_settings"
+        android:title="@string/desc_nav_settings"/>
+</menu>

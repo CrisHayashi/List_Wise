@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <!-- TELAS PRINCIPAIS -->
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.list_wise.ui.lists.DashboardFragment"
+        android:label="Dashboard" />
+
+    <fragment
+        android:id="@+id/shoppingFragment"
+        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
+        android:label="Compras" />
+
+    <fragment
+        android:id="@+id/historicFragment"
+        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
+        android:label="Histórico" />
+
+    <fragment
+        android:id="@+id/storeLocatorFragment"
+        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
+        android:label="Lojas" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
+        android:label="Configurações" />
+
+    <!-- TELAS SECUNDÁRIAS / FLUXO INTERNO -->
+    <fragment
+        android:id="@+id/createListNameFragment"
+        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
+        android:label="Criar Nome Lista" />
+
+    <fragment
+        android:id="@+id/desireListFragment"
+        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
+        android:label="Listas Desejadas" />
+
+    <fragment
+        android:id="@+id/purchasedListFragment"
+        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
+        android:label="Listas Compradas" />
+
+    <!-- Você pode usar actions também -->
+    <action
+        android:id="@+id/action_listFragment_to_createListNameFragment"
+        app:destination="@id/createListNameFragment"/>
+</navigation>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:padding="24dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Botão: Criar Lista -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCreateList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_create_list"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="16sp"
+            app:icon="@drawable/ico_add_list"
+            app:iconGravity="textStart"
+            android:gravity="start|center_vertical"
+            android:paddingStart="90dp"
+            android:paddingEnd="16dp"
+            app:iconPadding="12dp"
+            android:backgroundTint="@color/colorSurface"
+            app:cornerRadius="12dp"
+            app:iconTint="@color/colorOnPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="48dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Botão: Listas Desejadas -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWishlist"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_wishlist"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="16sp"
+            app:icon="@drawable/ico_wishlist"
+            app:iconGravity="textStart"
+            android:gravity="start|center_vertical"
+            android:paddingStart="90dp"
+            android:paddingEnd="16dp"
+            app:iconPadding="12dp"
+            android:backgroundTint="@color/colorSurface"
+            app:cornerRadius="12dp"
+            app:iconTint="@color/colorOnPrimary"
+            app:layout_constraintTop_toBottomOf="@id/btnCreateList"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp" />
+
+        <!-- Botão: Listas Compradas -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPurchased"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_purchased"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="16sp"
+            app:icon="@drawable/ico_cart"
+            app:iconGravity="textStart"
+            android:gravity="start|center_vertical"
+            android:paddingStart="90dp"
+            android:paddingEnd="16dp"
+            app:iconPadding="12dp"
+            android:backgroundTint="@color/colorSurface"
+            app:cornerRadius="12dp"
+            app:iconTint="@color/colorOnPrimary"
+            app:layout_constraintTop_toBottomOf="@id/btnWishlist"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="48dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

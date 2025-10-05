@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Seu estilo BotaoAzul -->
+    <style name="BotaoAzul">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">12dp</item>
+    </style>
+
+    <style name="BottomNavigationViewLargeIcon" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="iconSize">36dp</item> <!-- Tamanho desejado -->
+    </style>
+
+</resources>
