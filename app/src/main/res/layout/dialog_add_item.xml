@@ -1,49 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/editItemName"
-        android:hint="Nome do item"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:clipToPadding="false">
 
-    <EditText
-        android:id="@+id/editItemBrand"
-        android:hint="Marca (opcional)"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/editItemName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        <EditText
+            android:id="@+id/editItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:hint="@string/nome_item"
+            android:inputType="text"
+            android:textColor="@color/colorInputHint"
+            android:autofillHints="name"
+            android:layout_marginBottom="8dp"/>
 
-    <EditText
-        android:id="@+id/editItemQuantity"
-        android:hint="Quantidade"
-        android:inputType="number"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/editItemBrand"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        <EditText
+            android:id="@+id/editItemBrand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:hint="@string/hint_item_brand"
+            android:inputType="text"
+            android:textColor="@color/colorInputHint"
+            android:autofillHints="organization"
+            android:layout_marginTop="8dp"/>
 
-    <EditText
-        android:id="@+id/editItemPrice"
-        android:hint="Preço estimado"
-        android:inputType="numberDecimal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/editItemQuantity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/editItemQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:hint="@string/hint_item_quantity"
+            android:inputType="number"
+            android:textColor="@color/colorInputHint"
+            android:autofillHints="quantity"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/editItemPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:hint="@string/hint_item_price"
+            android:inputType="numberDecimal"
+            android:textColor="@color/colorInputHint"
+            android:autofillHints="price"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+</ScrollView>

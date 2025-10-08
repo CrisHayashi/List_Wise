@@ -3,42 +3,85 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp" >
 
-    <!-- Barra de pesquisa -->
-    <EditText
-        android:id="@+id/editSearchItem"
+    <!-- Nome da Lista -->
+    <TextView
+        android:id="@+id/textListName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Pesquisar item"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:background="@drawable/bg_search_bar"
-        android:padding="12dp"
+        android:text="Churrasco Confraternização 2025"
+        android:textColor="@color/colorSurface"
+        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="8dp" />
+        android:layout_marginBottom="8dp" />
 
-    <!-- Lista de Categorias -->
+    <!-- Barra de pesquisa -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Pesquisar item"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ico_search"
+        app:endIconTint="@color/colorInputText"
+        app:layout_constraintTop_toBottomOf="@id/textListName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editSearchItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:imeOptions="actionSearch" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- RecyclerView (Categorias + Itens) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCategories"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingHorizontal="8dp"
-        app:layout_constraintTop_toBottomOf="@id/editSearchItem"
+        android:clipToPadding="false"
+        android:paddingBottom="72dp"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botão Finalizar -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <!-- Botão "Finalizar" -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btnFinalize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Finalizar"
-        android:src="@drawable/ic_done"
+        android:text="Finalizar"
+        android:icon="@drawable/ico_done"
+        app:iconTint="@color/colorOnPrimary"
+        android:textColor="@color/colorOnPrimary"
+        app:backgroundTint="@color/colorOnBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Botão de adicionar novo item -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ico_add_list"
+        android:contentDescription="Adicionar Item"
+        app:tint="@color/colorOnBackground"
+        app:backgroundTint="@color/colorBackground"
+        app:layout_constraintBottom_toTopOf="@id/btnFinalize"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

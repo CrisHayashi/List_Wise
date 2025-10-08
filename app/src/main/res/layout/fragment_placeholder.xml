@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:text="@string/developing_screen_message"
         android:textSize="20sp"
-        android:textColor="@color/colorSecondaryText" />
+        android:textColor="@color/colorInputText" />
 
 </FrameLayout>

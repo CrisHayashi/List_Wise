@@ -4,28 +4,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.list_wise.R
 
-data class Category(
-    val name: String,
-    val items: MutableList<Item>,
-    var isExpanded: Boolean = true
-)
-
 class CategoryAdapter(
-    private val categories: MutableList<Category>,
+    private var categories: MutableList<Category>,
     private val onAddItem: (Category) -> Unit,
     private val onEditItem: (Item) -> Unit,
     private val onDeleteItem: (Item) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
-    class CategoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.txtCategoryTitle)
-        val btnAdd: ImageButton = view.findViewById(R.id.btnAddItemCategory)
-        val recyclerViewSubItems: RecyclerView = view.findViewById(R.id.recyclerViewSubItems)
+    fun submitList(newList: List<Category>) {
+        categories = newList.toMutableList()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -35,27 +29,52 @@ class CategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val category = categories[position]
-        holder.title.text = category.name
-
-        // Sub-lista de itens da categoria
-        val itemAdapter = ItemAdapter(category.items, onEditItem, onDeleteItem)
-        holder.recyclerViewSubItems.layoutManager = LinearLayoutManager(holder.itemView.context)
-        holder.recyclerViewSubItems.adapter = itemAdapter
-
-        // Exibir/ocultar lista de itens
-        holder.recyclerViewSubItems.visibility =
-            if (category.isExpanded) View.VISIBLE else View.GONE
-
-        holder.title.setOnClickListener {
-            category.isExpanded = !category.isExpanded
-            notifyItemChanged(position)
-        }
-
-        holder.btnAdd.setOnClickListener {
-            onAddItem(category)
-        }
+        holder.bind(categories[position])
     }
 
     override fun getItemCount(): Int = categories.size
+
+    inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val txtCategoryName: TextView = itemView.findViewById(R.id.txtCategoryName)
+        private val btnExpand: ImageView = itemView.findViewById(R.id.btnExpand)
+        private val btnAdd: ImageButton = itemView.findViewById(R.id.btnAddItemToCategory)
+        private val rvItems: RecyclerView = itemView.findViewById(R.id.recyclerViewItems)
+        private val itemAdapter = ItemAdapter(onEditItem, onDeleteItem)
+
+        init {
+            rvItems.layoutManager = LinearLayoutManager(itemView.context)
+            rvItems.adapter = itemAdapter
+        }
+
+        fun bind(category: Category) {
+            txtCategoryName.text = category.name
+            btnExpand.rotation = if (category.expanded) 180f else 0f
+
+            /// Exibe os itens se a categoria estiver expandida
+            if (category.expanded) {
+                val sorted = category.items.sortedBy { it.nome.lowercase() }
+                itemAdapter.submitList(sorted.toMutableList())
+                rvItems.visibility = View.VISIBLE
+            } else {
+                rvItems.visibility = View.GONE
+            }
+
+            btnExpand.setOnClickListener {
+                category.expanded = !category.expanded
+                btnExpand.animate().rotation(if (category.expanded) 180f else 0f).setDuration(200)
+
+                if (category.expanded) {
+                    val sorted = category.items.sortedBy { it.nome.lowercase() }
+                    itemAdapter.submitList(sorted.toMutableList())
+                    rvItems.visibility = View.VISIBLE
+                } else {
+                    rvItems.visibility = View.GONE
+                }
+            }
+
+            btnAdd.setOnClickListener {
+                onAddItem(category)
+            }
+        }
+    }
 }

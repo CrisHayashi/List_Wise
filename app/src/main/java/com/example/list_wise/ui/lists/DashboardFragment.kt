@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.list_wise.R
 
 class DashboardFragment : Fragment() {
@@ -26,7 +27,8 @@ class DashboardFragment : Fragment() {
         val btnPurchased = view.findViewById<Button>(R.id.btnPurchased)
 
         btnCreate.setOnClickListener {
-            Toast.makeText(requireContext(), "Criar nova lista...", Toast.LENGTH_SHORT).show()
+            // Navega para o CreateListFragment
+            findNavController().navigate(R.id.action_dashboard_to_createList)
         }
 
         btnWishlist.setOnClickListener {

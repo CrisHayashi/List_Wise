@@ -45,8 +45,8 @@
 
     <ImageButton
         android:id="@+id/btnEdit"
-        android:src="@android:drawable/ic_menu_edit"
-        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ico_edit"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/txtItemDetails"
@@ -54,8 +54,8 @@
 
     <ImageButton
         android:id="@+id/btnDelete"
-        android:src="@android:drawable/ic_delete"
-        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/ico_delete"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/btnEdit"

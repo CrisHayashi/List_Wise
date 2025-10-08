@@ -1,6 +1,11 @@
 <resources>
+    <!-- App -->
     <string name="app_name">List Wise</string>
     <string name="listwise_image_description">Logo do aplicativo</string>
+    <string name="my_image_description">Logo do rodapé</string>
+    <string name="itech_inspirationalTech">inspirational Tech</string>
+
+    <!-- Login / Cadastro -->
     <string name="enter_text">Login</string>
     <string name="cadastro_text">Cadastro</string>
     <string name="login_prompt">E-mail</string>
@@ -12,17 +17,30 @@
     <string name="login_google_text">Entrar com Google</string>
     <string name="create_account_text">Não tem conta?</string>
     <string name="create_account_btn">Criar Conta</string>
-    <string name="my_image_description">Logo do rodapé</string>
-    <string name="itech_inspirationalTech">inspirational Tech</string>
+
+    <!-- Navegação / Drawer / BottomNav -->
     <string name="desc_nav_list">Abrir listas</string>
     <string name="desc_nav_cart">Abrir carrinho</string>
     <string name="desc_nav_alarm">Abrir histórico</string>
     <string name="desc_nav_location">Abrir localização</string>
     <string name="desc_nav_settings">Abrir configurações</string>
+
+    <!-- Botões e Ações -->
     <string name="btn_create_list">Criar Lista</string>
     <string name="btn_wishlist">Listas Desejadas</string>
     <string name="btn_purchased">Listas Compradas</string>
     <string name="developing_screen_message">Tela em desenvolvimento</string>
+    <string name="expandir_categoria">Expandir</string>
+    <string name="adicionar_item">Adicionar item</string>
+    <string name="desc_edit_item">Editar item</string>
+    <string name="desc_delete_item">Excluir item</string>
+
+    <!-- Itens / Categorias -->
+    <string name="nome_item">Nome do item</string>
+    <string name="hint_item_brand">Marca (opcional)</string>
+    <string name="hint_item_quantity">Quantidade</string>
+    <string name="hint_item_price">Preço</string>
+    <string name="categoria">Categoria</string>
 
     <!-- Mensagens -->
     <string name="login_success_message">Login realizado com sucesso!</string>

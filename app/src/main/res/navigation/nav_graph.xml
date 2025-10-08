@@ -5,12 +5,48 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/dashboardFragment">
 
-    <!-- TELAS PRINCIPAIS -->
+    <!-- DASHBOARD (ponto inicial após o login/MainActivity) -->
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.example.list_wise.ui.lists.DashboardFragment"
-        android:label="Dashboard" />
+        android:label="Dashboard" >
+        <!-- Da Dashboard o usuário pode ir para CreateList -->
+        <action
+            android:id="@+id/action_dashboard_to_createList"
+            app:destination="@id/createListFragment" />
+    </fragment>
 
+    <!-- CRIAR NOVA LISTA -->
+    <fragment
+        android:id="@+id/createListFragment"
+        android:name="com.example.list_wise.ui.lists.CreateListFragment"
+        android:label="Criar Lista" >
+        <!-- Do CreateList pode ir para ListFragment -->
+        <action
+            android:id="@+id/action_createList_to_list"
+            app:destination="@id/listFragment"
+            app:popUpTo="@id/listFragment"
+            app:popUpToInclusive="true"/>
+        <!-- E pode voltar para Dashboard -->
+        <action
+            android:id="@+id/action_createList_to_dashboard"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <!-- LISTA DE COMPRAS -->
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.list_wise.ui.lists.ListFragment"
+        android:label="Lista de Compras" >
+        <argument
+            android:name="listName"
+            app:argType="string"
+            android:defaultValue="Minha Lista" />
+    </fragment>
+
+    <!-- OUTROS FRAGMENTOS DO BOTTOM NAV -->
     <fragment
         android:id="@+id/shoppingFragment"
         android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
@@ -31,12 +67,7 @@
         android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
         android:label="Configurações" />
 
-    <!-- TELAS SECUNDÁRIAS / FLUXO INTERNO -->
-    <fragment
-        android:id="@+id/createListNameFragment"
-        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
-        android:label="Criar Nome Lista" />
-
+    <!-- FRAGMENTOS OPCIONAIS -->
     <fragment
         android:id="@+id/desireListFragment"
         android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
@@ -47,8 +78,4 @@
         android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
         android:label="Listas Compradas" />
 
-    <!-- Você pode usar actions também -->
-    <action
-        android:id="@+id/action_listFragment_to_createListNameFragment"
-        app:destination="@id/createListNameFragment"/>
 </navigation>

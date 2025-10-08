@@ -3,6 +3,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.navigation.safeargs)
 }
 
 android {
@@ -35,6 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    // Habilita o View Binding no Kotlin DSL
+    buildFeatures.viewBinding = true
 }
 
 dependencies {

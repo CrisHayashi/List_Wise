@@ -1,6 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="6dp"
+    android:paddingHorizontal="8dp">
 
+    <!-- Checkbox para selecionar item -->
+    <CheckBox
+        android:id="@+id/chkSelectItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!-- Nome do item -->
+    <TextView
+        android:id="@+id/txtItemName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/nome_item"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorSurface"
+        app:layout_constraintStart_toEndOf="@id/chkSelectItem"
+        app:layout_constraintEnd_toStartOf="@id/txtItemPrice"
+        app:layout_constraintTop_toTopOf="parent"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
+    <!-- Linha de detalhes opcionais -->
+    <TextView
+        android:id="@+id/txtItemDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="13sp"
+        android:textColor="@color/colorSurface"
+        app:layout_constraintTop_toBottomOf="@id/txtItemName"
+        app:layout_constraintStart_toEndOf="@id/chkSelectItem"
+        app:layout_constraintEnd_toStartOf="@id/txtItemPrice"
+        android:layout_marginTop="2dp"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+    <!-- Preço -->
+    <TextView
+        android:id="@+id/txtItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14sp"
+        android:textColor="@color/colorSurface"
+        app:layout_constraintEnd_toStartOf="@id/btnEditItem"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/txtItemDetails"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Botão Editar -->
+    <ImageButton
+        android:id="@+id/btnEditItem"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ico_edit"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/desc_edit_item"
+        app:layout_constraintEnd_toStartOf="@id/btnDeleteItem"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!-- Botão Excluir -->
+    <ImageButton
+        android:id="@+id/btnDeleteItem"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ico_delete"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/desc_delete_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!-- Linha divisória -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        app:layout_constraintTop_toBottomOf="@id/txtItemPrice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="6dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
