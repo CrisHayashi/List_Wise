@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Primárias -->
-    <color name="colorPrimary">#83def8</color> <!-- Azul destaque do projeto -->
+    <color name="colorPrimary">#0628ad</color>
     <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorPrimary2">#83def8</color> <!-- Azul destaque do projeto -->
+
     <!-- Fundo -->
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorOnBackground">#000000</color>

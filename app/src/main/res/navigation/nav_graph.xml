@@ -10,10 +10,20 @@
         android:id="@+id/dashboardFragment"
         android:name="com.example.list_wise.ui.lists.DashboardFragment"
         android:label="Dashboard" >
+        <argument
+            android:name="listName"
+            app:argType="string"
+            android:defaultValue="Minha Lista" />
         <!-- Da Dashboard o usuário pode ir para CreateList -->
         <action
             android:id="@+id/action_dashboard_to_createList"
             app:destination="@id/createListFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_desireList"
+            app:destination="@id/desireListFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_purchasedList"
+            app:destination="@id/purchasedListFragment" />
     </fragment>
 
     <!-- CRIAR NOVA LISTA -->
@@ -25,8 +35,12 @@
         <action
             android:id="@+id/action_createList_to_list"
             app:destination="@id/listFragment"
-            app:popUpTo="@id/listFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" >
+            <argument
+                android:name="listName"
+                app:argType="string" />
+        </action>
         <!-- E pode voltar para Dashboard -->
         <action
             android:id="@+id/action_createList_to_dashboard"
@@ -35,23 +49,7 @@
             app:popUpToInclusive="true"/>
     </fragment>
 
-    <!-- LISTA DE COMPRAS -->
-    <fragment
-        android:id="@+id/listFragment"
-        android:name="com.example.list_wise.ui.lists.ListFragment"
-        android:label="Lista de Compras" >
-        <argument
-            android:name="listName"
-            app:argType="string"
-            android:defaultValue="Minha Lista" />
-    </fragment>
-
     <!-- OUTROS FRAGMENTOS DO BOTTOM NAV -->
-    <fragment
-        android:id="@+id/shoppingFragment"
-        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
-        android:label="Compras" />
-
     <fragment
         android:id="@+id/historicFragment"
         android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
@@ -64,18 +62,27 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
+        android:name="com.example.list_wise.ui.lists.SettingsFragment"
         android:label="Configurações" />
 
     <!-- FRAGMENTOS OPCIONAIS -->
     <fragment
         android:id="@+id/desireListFragment"
-        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
+        android:name="com.example.list_wise.ui.lists.DesireListFragment"
         android:label="Listas Desejadas" />
 
     <fragment
         android:id="@+id/purchasedListFragment"
-        android:name="com.example.list_wise.ui.lists.PlaceholderFragment"
+        android:name="com.example.list_wise.ui.lists.PurchasedListFragment"
         android:label="Listas Compradas" />
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.list_wise.ui.lists.ListFragment"
+        android:label="Lista">
+        <argument
+            android:name="listName"
+            app:argType="string"
+            android:defaultValue="Minha Lista" />
+    </fragment>
 
 </navigation>

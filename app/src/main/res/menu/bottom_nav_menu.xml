@@ -1,12 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/listFragment"
+        android:id="@+id/dashboardFragment"
         android:icon="@drawable/ico_list"
         android:title="@string/desc_nav_list"/>
-    <item
-        android:id="@+id/shoppingFragment"
-        android:icon="@drawable/ico_cart"
-        android:title="@string/desc_nav_cart"/>
     <item
         android:id="@+id/historicFragment"
         android:icon="@drawable/ico_alarm"

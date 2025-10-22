@@ -1,52 +1,75 @@
 <resources>
     <!-- App -->
+    <string name="app_footer">Feito com carinho para facilitar suas compras.</string>
     <string name="app_name">List Wise</string>
+    <string name="app_version">List Wise v1.0.3</string>
+    <string name="itech_inspirationalTech">inspirational Tech</string>
     <string name="listwise_image_description">Logo do aplicativo</string>
     <string name="my_image_description">Logo do rodapé</string>
-    <string name="itech_inspirationalTech">inspirational Tech</string>
+    <string name="company_logo_description">Logo da empresa</string>
+
+    <!-- Botões e Ações -->
+    <string name="adicionar_item">Adicionar item</string>
+    <string name="btn_create_list">Criar Lista</string>
+    <string name="btn_finalize">Finalizar</string>
+    <string name="btn_purchased">Listas Compradas</string>
+    <string name="btn_save">Salvar</string>
+    <string name="btn_wishlist">Listas Desejadas</string>
+    <string name="desc_add_item">Adicionar Item</string>
+    <string name="desc_delete_item">Excluir item</string>
+    <string name="desc_edit_item">Editar item</string>
+    <string name="developing_screen_message">Tela em desenvolvimento</string>
+    <string name="expandir_categoria">Expandir</string>
+
+    <!-- Itens / Categorias -->
+    <string name="categoria">Categoria</string>
+    <string name="hint_item_brand">Marca (opcional)</string>
+    <string name="hint_item_price">Preço</string>
+    <string name="hint_item_quantity">Quantidade</string>
+    <string name="hint_list_name">Nome da Lista</string>
+    <string name="hint_search_item">Pesquisar item</string>
+    <string name="nome_item">Nome do item</string>
+    <string name="title_create_list">Criar Nova Lista</string>
+    <string name="title_desired_lists">Listas Desejadas</string>
+    <string name="title_purchased_lists">Histórico de Compras</string>
 
     <!-- Login / Cadastro -->
-    <string name="enter_text">Login</string>
+    <string name="cadastro_error_message">Por favor, preencha todos os campos.</string>
+    <string name="cadastro_success_message">Cadastro realizado com sucesso!</string>
     <string name="cadastro_text">Cadastro</string>
-    <string name="login_prompt">E-mail</string>
-    <string name="password_prompt">Senha</string>
-    <string name="forgot_password_text">Esqueceu a senha?</string>
-    <string name="login_button">Login</string>
-    <string name="or_text">ou</string>
-    <string name="google_img_desc">Ícone do Google</string>
-    <string name="login_google_text">Entrar com Google</string>
-    <string name="create_account_text">Não tem conta?</string>
     <string name="create_account_btn">Criar Conta</string>
+    <string name="create_account_text">Não tem conta?</string>
+    <string name="forgot_password_text">Esqueceu a senha?</string>
+    <string name="google_img_desc">Ícone do Google</string>
+    <string name="login_button">Login</string>
+    <string name="login_empty_message">Preencha todos os campos.</string>
+    <string name="login_found_message">Já existe um usuário com este e-mail.</string>
+    <string name="login_google_text">Entrar com Google</string>
+    <string name="login_prompt">E-mail</string>
+    <string name="login_success_message">Login realizado com sucesso!</string>
+    <string name="login_error_message">Usuário ou senha incorretos.</string>
+    <string name="enter_text">Login</string>
+    <string name="password_prompt">Senha</string>
+    <string name="or_text">ou</string>
 
     <!-- Navegação / Drawer / BottomNav -->
-    <string name="desc_nav_list">Abrir listas</string>
-    <string name="desc_nav_cart">Abrir carrinho</string>
     <string name="desc_nav_alarm">Abrir histórico</string>
+    <string name="desc_nav_cart">Abrir carrinho</string>
+    <string name="desc_nav_list">Abrir listas</string>
     <string name="desc_nav_location">Abrir localização</string>
     <string name="desc_nav_settings">Abrir configurações</string>
 
-    <!-- Botões e Ações -->
-    <string name="btn_create_list">Criar Lista</string>
-    <string name="btn_wishlist">Listas Desejadas</string>
-    <string name="btn_purchased">Listas Compradas</string>
-    <string name="developing_screen_message">Tela em desenvolvimento</string>
-    <string name="expandir_categoria">Expandir</string>
-    <string name="adicionar_item">Adicionar item</string>
-    <string name="desc_edit_item">Editar item</string>
-    <string name="desc_delete_item">Excluir item</string>
-
-    <!-- Itens / Categorias -->
-    <string name="nome_item">Nome do item</string>
-    <string name="hint_item_brand">Marca (opcional)</string>
-    <string name="hint_item_quantity">Quantidade</string>
-    <string name="hint_item_price">Preço</string>
-    <string name="categoria">Categoria</string>
-
-    <!-- Mensagens -->
-    <string name="login_success_message">Login realizado com sucesso!</string>
-    <string name="login_error_message">Usuário ou senha incorretos.</string>
-    <string name="login_empty_message">Preencha todos os campos.</string>
-    <string name="cadastro_error_message">Por favor, preencha todos os campos.</string>
-    <string name="login_found_message">Já existe um usuário com este e-mail.</string>
-    <string name="cadastro_success_message">Cadastro realizado com sucesso!</string>
+    <!-- Tela de Configuração -->
+    <string name="appearance">🌗 Aparência</string>
+    <string name="choose_language">Português</string> <!-- ou "Escolha o idioma" -->
+    <string name="choose_theme">Sistema</string> <!-- ou "Escolha o tema" -->
+    <string name="clear_all_data">Limpar Todos os Dados</string>
+    <string name="config_subtitle">Personalize sua experiência no app</string>
+    <string name="config_title">Configuração</string>
+    <string name="icon_expand_description">Ícone para expandir opções</string>
+    <string name="language">🌍 Idioma</string>
+    <string name="logout">Logout</string>
+    <string name="notifications_push">🔔 Notificações Push</string>
+    <string name="offline_mode">🌐 Modo Offline</string>
+    <string name="export_data">Exportar Dados</string>
 </resources>

@@ -27,13 +27,14 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="28dp">
+            android:padding="32dp">
 
             <ImageView
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:contentDescription="@string/listwise_image_description"
-                android:src="@drawable/listwise_logo" />
+                android:src="@drawable/listwise_logo2"
+                android:layout_marginBottom="24dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
                 android:text="@string/enter_text"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
-                android:textSize="36sp" />
+                android:textSize="32sp" />
 
             <EditText
                 android:id="@+id/txtLoginPrompt"
@@ -56,8 +57,9 @@
                 android:textColor="@color/colorInputText"
                 android:textColorHint="@color/colorInputHint"
                 android:drawableStart="@drawable/ico_email"
-                android:drawablePadding="10dp"
-                android:inputType="textEmailAddress" />
+                android:drawablePadding="12dp"
+                android:inputType="textEmailAddress"
+                android:layout_marginBottom="16dp"/>
 
             <EditText
                 android:id="@+id/txtPasswordPrompt"
@@ -70,8 +72,9 @@
                 android:textColor="@color/colorInputText"
                 android:textColorHint="@color/colorInputHint"
                 android:drawableStart="@drawable/ico_password"
-                android:drawablePadding="10dp"
-                android:inputType="textPassword" />
+                android:drawablePadding="12dp"
+                android:inputType="textPassword"
+                android:layout_marginBottom="8dp"/>
 
             <TextView
                 android:id="@+id/txtForgotPassword"
@@ -80,15 +83,19 @@
                 android:layout_gravity="end"
                 android:layout_marginTop="2dp"
                 android:text="@string/forgot_password_text"
-                android:textColor="@color/colorSecondaryText" />
+                android:textColor="@color/colorSecondaryText"
+                android:layout_marginBottom="16dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
-                style="@style/BotaoAzul"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/login_button" />
+                android:layout_marginTop="16dp"
+                android:text="@string/login_button"
+                app:cornerRadius="12dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/txtOr"

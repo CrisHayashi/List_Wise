@@ -1,12 +1,10 @@
 package com.example.list_wise
 
 import android.os.Bundle
-import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,5 +17,11 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setupWithNavController(navController)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+            ?.let { it as NavHostFragment }
+            ?.navController
+        return navController?.navigateUp() ?: super.onSupportNavigateUp()
     }
 }

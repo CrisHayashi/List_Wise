@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.list_wise.databinding.FragmentCreateListBinding
-import com.example.list_wise.ui.lists.CreateListFragmentDirections
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.list_wise.R
 
@@ -43,7 +42,6 @@ class CreateListFragment : Fragment() {
 
             // Atualiza o BottomNavigation para marcar o primeiro botão (ListFragment)
             val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
-            bottomNav.selectedItemId = R.id.listFragment // <-- id do primeiro botão do bottom nav
         }
     }
 

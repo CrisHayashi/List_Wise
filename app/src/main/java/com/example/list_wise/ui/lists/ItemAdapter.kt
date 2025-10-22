@@ -49,7 +49,11 @@ class ItemAdapter(
             txtItemDetails.text = detalhes.joinToString(" • ")
 
             // Preço formatado com símbolo do real
-            val precoText = if (item.preco > 0.0) currencyFormatter.format(item.preco) else "—"
+            val precoText = if (item.preco > 0.0) {
+                currencyFormatter.format(item.preco)
+            } else {
+                "—"
+            }
             txtItemPrice.text = precoText
 
             // CheckBox
@@ -62,17 +66,23 @@ class ItemAdapter(
             // Botões
             btnEdit.setOnClickListener { onEditItem(item) }
             btnDelete.setOnClickListener { onDeleteItem(item) }
+
+            // Clicar no item também alterna o checkbox
+            itemView.setOnClickListener {
+                val newState = !item.isSelected
+                item.isSelected = newState
+                chkSelect.isChecked = newState
+            }
         }
     }
 
+    // 🔹 Função nova: retorna somente os selecionados
+    fun getSelectedItems(): List<Item> = currentList.filter { it.isSelected }
     class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
-        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-            // Identifica item unicamente pelo nome + marca
-            return oldItem.nome == newItem.nome && oldItem.marca == newItem.marca
-        }
-
-        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-            return oldItem == newItem
-        }
+        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean =
+            /// compara a referência do objeto
+            oldItem === newItem
+        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean =
+            oldItem == newItem
     }
 }

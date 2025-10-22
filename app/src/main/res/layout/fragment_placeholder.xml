@@ -8,8 +8,9 @@
         android:id="@+id/txtPlaceholder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="20dp"
         android:text="@string/developing_screen_message"
         android:textSize="20sp"
-        android:textColor="@color/colorInputText" />
+        android:textColor="@color/colorSurface" />
 
 </FrameLayout>

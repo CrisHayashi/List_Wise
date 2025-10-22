@@ -11,7 +11,7 @@
     <CheckBox
         android:id="@+id/chkSelectItem"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +30,10 @@
         app:layout_constraintEnd_toStartOf="@id/txtItemPrice"
         app:layout_constraintTop_toTopOf="parent"
         android:ellipsize="end"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        app:layout_constraintHorizontal_bias="0"
+        android:scrollHorizontally="false"
+        android:singleLine="true"/>
 
     <!-- Linha de detalhes opcionais -->
     <TextView
@@ -44,7 +47,8 @@
         app:layout_constraintStart_toEndOf="@id/chkSelectItem"
         app:layout_constraintEnd_toStartOf="@id/txtItemPrice"
         android:layout_marginTop="2dp"
-        android:maxLines="1"
+        android:lineSpacingExtra="2dp"
+        android:maxLines="2"
         android:ellipsize="end"/>
 
     <!-- Preço -->
@@ -58,7 +62,9 @@
         app:layout_constraintEnd_toStartOf="@id/btnEditItem"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/txtItemDetails"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginEnd="8dp"
+        android:ellipsize="none"
+        android:scrollHorizontally="false"/>
 
     <!-- Botão Editar -->
     <ImageButton
@@ -69,7 +75,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/desc_edit_item"
         app:layout_constraintEnd_toStartOf="@id/btnDeleteItem"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chkSelectItem"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <!-- Botão Excluir -->
@@ -81,13 +87,13 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/desc_delete_item"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chkSelectItem"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <!-- Linha divisória -->
     <View
         android:layout_width="0dp"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:background="#E0E0E0"
         app:layout_constraintTop_toBottomOf="@id/txtItemPrice"
         app:layout_constraintStart_toStartOf="parent"
