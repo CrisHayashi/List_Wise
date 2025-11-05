@@ -36,7 +36,7 @@ class IntroActivity : AppCompatActivity() {
                 // espera 1s depois da animação (opcional)
                 Handler(Looper.getMainLooper()).postDelayed({
                     goToLogin()
-                }, 2000)
+                }, 1000)
             }
         })
     }
