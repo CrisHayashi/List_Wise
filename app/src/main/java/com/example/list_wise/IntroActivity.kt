@@ -32,6 +32,8 @@ class IntroActivity : AppCompatActivity() {
                 // Nada a fazer aqui
             }
 
+            val teste = ""
+
             override fun onAnimationEnd(anim: Animation?) {
                 // espera 1s depois da animação (opcional)
                 Handler(Looper.getMainLooper()).postDelayed({
