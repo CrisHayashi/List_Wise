@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.list_wise.R
-import com.example.list_wise.ui.lists.Category
-import com.example.list_wise.ui.lists.CategoryAdapter
-import com.example.list_wise.ui.lists.Item
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class PurchasedListFragment : Fragment() {
@@ -20,6 +18,7 @@ class PurchasedListFragment : Fragment() {
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var txtListName: TextView
+    private lateinit var viewModel: ListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,14 +46,13 @@ class PurchasedListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = categoryAdapter
 
-        val categoriasCompradas = getMockedPurchasedCategories()
-        categoryAdapter.submitList(categoriasCompradas)
-    }
+        viewModel = ViewModelProvider(this, ViewModelFactory(requireContext())).get(ListViewModel::class.java)
 
-    private fun getMockedPurchasedCategories(): List<Category> {
-        return listOf(
-            Category("Padaria", listOf(Item("Pão francês", null, 10, 8.0)).toMutableList()),
-            Category("Bebidas", listOf(Item("Suco de uva", "Integral", 1, 12.0)).toMutableList())
-        )
+        viewModel.categorias.observe(viewLifecycleOwner) { categorias ->
+            categoryAdapter.submitList(categorias)
+        }
+
+        // Aqui você pode carregar a lista mais recente ou uma específica
+        viewModel.carregarItensDeListaFinalizada(listaId = 1) // substitua pelo ID real
     }
 }
