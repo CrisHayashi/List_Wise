@@ -15,7 +15,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.list_wise.databinding.FragmentListBinding
 import androidx.lifecycle.ViewModelProvider
 import com.example.list_wise.R
-import com.example.list_wise.ui.lists.ListViewModel
 
 class ListFragment : Fragment() {
 

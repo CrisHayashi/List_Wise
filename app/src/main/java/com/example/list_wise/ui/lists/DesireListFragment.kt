@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.list_wise.R
@@ -21,6 +22,7 @@ class DesireListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var btnFinalize: ExtendedFloatingActionButton
     private lateinit var txtListName: TextView
+    private lateinit var viewModel: ListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +38,9 @@ class DesireListFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerViewCategories)
         btnFinalize = view.findViewById(R.id.btnFinalize)
 
+        // 1. Inicializar o ViewModel usando a Factory (necessária pelo construtor com Context)
+        viewModel = ViewModelProvider(this, ViewModelFactory(requireContext())).get(ListViewModel::class.java)
+
         txtListName.text = getString(R.string.title_desired_lists)
         btnFinalize.visibility = View.VISIBLE
 
@@ -48,21 +53,33 @@ class DesireListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = categoryAdapter
 
-        // Simulação de dados
-        val categoriasDesejadas = getMockedDesiredCategories()
-        categoryAdapter.submitList(categoriasDesejadas)
-
-        btnFinalize.setOnClickListener {
-            Toast.makeText(requireContext(), "Finalizando compra...", Toast.LENGTH_SHORT).show()
-            // Aqui você pode mover os itens selecionados para o histórico
+        viewModel.categorias.observe(viewLifecycleOwner) { categorias ->
+            categoryAdapter.submitList(categorias)
         }
-    }
 
-    private fun getMockedDesiredCategories(): List<Category> {
-        // Simulação de dados
-        return listOf(
-            Category("Frutas", listOf(Item("Banana", "Prata", 6, 5.0)).toMutableList()),
-            Category("Limpeza", listOf(Item("Detergente", "Ypê", 2, 3.5)).toMutableList())
-        )
+        val listaIdParaCarregar = arguments?.getInt("listaId")
+
+        if (listaIdParaCarregar != null && listaIdParaCarregar > 0) {
+            // Carrega a lista específica (Feira, Confraternização, etc.)
+            viewModel.carregarItensDaListaSelecionada(listaIdParaCarregar)
+            // 💡 IMPORTANTE: Você precisa garantir que a função ListRepository.obterItensDaLista(listaId)
+            // traga apenas itens com 'comprado_na_lista = 0' se for a lista Desejada.
+
+        } else {
+            // Caso não tenha ID (erro ou a primeira vez), trate a falha
+            Toast.makeText(requireContext(), "Erro: Nenhuma lista selecionada.", Toast.LENGTH_LONG).show()
+        }
+
+        // 4. Ação de Finalizar
+        btnFinalize.setOnClickListener {
+            // A lógica de Finalizar lista agora precisa do ID.
+            if (listaIdParaCarregar != null && listaIdParaCarregar > 0) {
+                Toast.makeText(requireContext(), "Preparando para finalizar lista ID: $listaIdParaCarregar...", Toast.LENGTH_SHORT).show()
+                // 💡 Chamar a função de finalização do ViewModel aqui:
+                // viewModel.finalizarLista(listaIdParaCarregar, "Nome Compra", "Local")
+            } else {
+                Toast.makeText(requireContext(), "Selecione uma lista antes de finalizar.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

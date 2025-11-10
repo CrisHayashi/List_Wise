@@ -21,11 +21,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
             CREATE TABLE listas (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,
-                dataFinalizacao TEXT NOT NULL,
+                dataFinalizacao TEXT,
                 totalGasto REAL DEFAULT 0.0,
                 local TEXT,
-    endereco TEXT,
-    quantidadeItens INTEGER DEFAULT 0
+                endereco TEXT,
+                quantidadeItens INTEGER DEFAULT 0,
+                finalizada INTEGER DEFAULT 0 -- 0=Desejada, 1=Comprada
             );
         """.trimIndent()
 

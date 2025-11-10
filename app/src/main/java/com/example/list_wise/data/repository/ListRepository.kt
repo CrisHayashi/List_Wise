@@ -3,11 +3,37 @@ package com.example.list_wise.data.repository
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import com.example.list_wise.data.database.DatabaseHelper
+import com.example.list_wise.data.database.getStringOrNull
 import com.example.list_wise.data.model.ItemEntity
 import com.example.list_wise.data.model.Lista
 import com.example.list_wise.data.model.ListaItemRelation
 
 class ListRepository(private val dbHelper: DatabaseHelper) {
+
+    // Obter todas as listas desejadas (não finalizadas)
+    fun obterTodasListasDesejadas(): List<Lista> {
+        val db = dbHelper.readableDatabase
+        // FILTRO: Apenas listas onde 'finalizada' é 0
+        val cursor = db.rawQuery("SELECT id, nome, dataFinalizacao, totalGasto, local, endereco, quantidadeItens, 0 AS finalizada FROM listas WHERE finalizada = 0 ORDER BY id DESC", null)
+        val listas = mutableListOf<Lista>()
+
+        while (cursor.moveToNext()) {
+            val lista = Lista(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                nome = cursor.getString(cursor.getColumnIndexOrThrow("nome")),
+                dataFinalizacao = cursor.getStringOrNull("dataFinalizacao"), // Usando Extension
+                totalGasto = cursor.getDouble(cursor.getColumnIndexOrThrow("totalGasto")),
+                local = cursor.getStringOrNull("local"),
+                endereco = cursor.getStringOrNull("endereco"),
+                quantidadeItens = cursor.getInt(cursor.getColumnIndexOrThrow("quantidadeItens")),
+                finalizada = false, // Filtro garante que é 0
+                dataCriacao = ""
+            )
+            listas.add(lista)
+        }
+        cursor.close()
+        return listas
+    }
 
     // Inserir uma nova lista
     fun inserirLista(lista: Lista): Long {
@@ -19,6 +45,7 @@ class ListRepository(private val dbHelper: DatabaseHelper) {
             put("local", lista.local)
             put("endereco", lista.endereco)
             put("quantidadeItens", lista.quantidadeItens)
+            put("finalizada", lista.finalizada)
         }
         return db.insert("listas", null, values)
     }
@@ -50,7 +77,7 @@ class ListRepository(private val dbHelper: DatabaseHelper) {
     fun obterItensDaLista(listaId: Int): List<Pair<ItemEntity, Int>> {
         val db = dbHelper.readableDatabase
         val query = """
-            SELECT i.id, i.nome, i.marca, i.preco, i.categoria, li.quantidade
+            SELECT i.id, i.nome, i.marca, i.preco, i.categoria, li.quantidade, li.comprado_na_lista
             FROM itens i
             INNER JOIN lista_itens li ON i.id = li.itemId
             WHERE li.listaId = ?
@@ -145,7 +172,8 @@ class ListRepository(private val dbHelper: DatabaseHelper) {
                     cursor.getString(cursor.getColumnIndexOrThrow("local")) else null,
                 endereco = if (!cursor.isNull(cursor.getColumnIndexOrThrow("endereco")))
                     cursor.getString(cursor.getColumnIndexOrThrow("endereco")) else null,
-                quantidadeItens = cursor.getInt(cursor.getColumnIndexOrThrow("quantidadeItens"))
+                quantidadeItens = cursor.getInt(cursor.getColumnIndexOrThrow("quantidadeItens")),
+                dataCriacao = ""
             )
         } else null
 
@@ -176,7 +204,8 @@ class ListRepository(private val dbHelper: DatabaseHelper) {
                     cursor.getString(cursor.getColumnIndexOrThrow("local")) else null,
                 endereco = if (!cursor.isNull(cursor.getColumnIndexOrThrow("endereco")))
                     cursor.getString(cursor.getColumnIndexOrThrow("endereco")) else null,
-                quantidadeItens = cursor.getInt(cursor.getColumnIndexOrThrow("quantidadeItens"))
+                quantidadeItens = cursor.getInt(cursor.getColumnIndexOrThrow("quantidadeItens")),
+                dataCriacao = ""
             )
             listas.add(lista)
         }
