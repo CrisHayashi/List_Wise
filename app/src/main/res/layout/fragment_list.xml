@@ -41,23 +41,6 @@
             android:imeOptions="actionSearch" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/locationLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Local da compra (ex: Feira, Mercado)"
-        app:layout_constraintTop_toBottomOf="@id/searchLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="12dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editListLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <!-- RecyclerView (Categorias + Itens) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCategories"
@@ -69,7 +52,7 @@
         android:fadeScrollbars="false"
         android:scrollbarThumbVertical="@drawable/scrollbar_thumb_custom"
         android:scrollbarSize="6dp"
-        app:layout_constraintTop_toBottomOf="@id/locationLayout"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout"
         app:layout_constraintBottom_toTopOf="@id/btnFinalize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -79,7 +62,7 @@
         android:id="@+id/btnFinalize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_finalize"
+        android:text="@string/action_go_to_shopping"
         android:translationZ="12dp"
         app:elevation="12dp"
         android:paddingStart="20dp"

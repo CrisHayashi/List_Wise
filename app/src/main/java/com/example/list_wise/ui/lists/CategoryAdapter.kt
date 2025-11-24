@@ -15,7 +15,8 @@ import com.example.list_wise.R
 class CategoryAdapter(
     private val onAddItem: (Category) -> Unit,
     private val onEditItem: (Item) -> Unit,
-    private val onDeleteItem: (Item) -> Unit
+    private val onDeleteItem: (Item) -> Unit,
+    private val onCheckItem: (Item, Boolean) -> Unit
 ) : ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -32,7 +33,7 @@ class CategoryAdapter(
         private val btnExpand: ImageView = itemView.findViewById(R.id.btnExpand)
         private val btnAdd: ImageButton = itemView.findViewById(R.id.btnAddItemToCategory)
         private val rvItems: RecyclerView = itemView.findViewById(R.id.recyclerViewItems)
-        private val itemAdapter = ItemAdapter(onEditItem, onDeleteItem)
+        private val itemAdapter = ItemAdapter(onEditItem, onDeleteItem, onCheckItem)
 
         init {
             rvItems.layoutManager = LinearLayoutManager(itemView.context)

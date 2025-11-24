@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.list_wise.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.list_wise.databinding.FragmentHistoricBinding
-import com.example.list_wise.ui.lists.ViewModelFactory
 
 class HistoricFragment : Fragment() {
 
@@ -28,7 +29,13 @@ class HistoricFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, ViewModelFactory(requireContext())).get(HistoricViewModel::class.java)
 
-        adapter = HistoricListAdapter()
+        adapter = HistoricListAdapter { lista ->
+            // Navegar para o detalhe da lista finalizada (PurchasedListFragment)
+            val action =
+                HistoricFragmentDirections.actionHistoricFragmentToPurchasedListFragment(lista.id)
+            findNavController().navigate(action)
+        }
+
         binding.recyclerViewHistoric.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewHistoric.adapter = adapter
 
@@ -54,7 +61,8 @@ class HistoricFragment : Fragment() {
         }
 
         binding.btnCreateList.setOnClickListener {
-            // Navegar para tela de criação de lista
+            /// Navegar direto para o Dashboard
+            findNavController().navigate(R.id.dashboardFragment)
         }
 
         viewModel.carregarDados()

@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.list_wise.R
 import com.example.list_wise.data.model.Lista
 import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
-class HistoricListAdapter : ListAdapter<Lista, HistoricListAdapter.ListaViewHolder>(DiffCallback()) {
+class HistoricListAdapter (
+    private val onItemClick: (Lista) -> Unit
+): ListAdapter<Lista, HistoricListAdapter.ListaViewHolder>(DiffCallback()) {
 
     private val currencyFormatter = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
-    private val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR"))
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_historic_list, parent, false)
@@ -40,8 +40,13 @@ class HistoricListAdapter : ListAdapter<Lista, HistoricListAdapter.ListaViewHold
             txtLocal.text = lista.local ?: "Local não informado"
             txtEndereco.text = lista.endereco ?: "Endereço não informado"
             txtValor.text = currencyFormatter.format(lista.totalGasto)
-            txtData.text = lista.dataFinalizacao
+            txtData.text = lista.dataFinalizacao ?: "-"
             txtStatus.text = "${lista.quantidadeItens} Itens"
+
+            // Clique no card chama o callback
+            itemView.setOnClickListener {
+                onItemClick(lista)
+            }
         }
     }
 

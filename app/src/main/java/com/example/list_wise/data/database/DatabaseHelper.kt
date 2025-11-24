@@ -17,36 +17,43 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
     }
 
     override fun onCreate(db: SQLiteDatabase) {
+        //tabela de listas
         val createListasTable = """
             CREATE TABLE listas (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,
+                dataCriacao TEXT NOT NULL,        -- Novo campo para ordenação
                 dataFinalizacao TEXT,
+                finalizada INTEGER DEFAULT 0,     -- 0=Desejada, 1=Comprada (ESSENCIAL)
                 totalGasto REAL DEFAULT 0.0,
                 local TEXT,
                 endereco TEXT,
-                quantidadeItens INTEGER DEFAULT 0,
-                finalizada INTEGER DEFAULT 0 -- 0=Desejada, 1=Comprada
+                quantidadeItens INTEGER DEFAULT 0
             );
         """.trimIndent()
 
+        // Tabela de itens é um catálogo. Removido 'quantidade'
         val createItensTable = """
             CREATE TABLE itens (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,
                 marca TEXT,
-                preco REAL DEFAULT 0.0,
+                precoPadrao REAL DEFAULT 0.0,   -- Preço padrão para sugestão
                 categoria TEXT
             );
         """.trimIndent()
 
+        // Tabela de ligação com dados específicos da compra, relação lista-itens
         val createListaItensTable = """
             CREATE TABLE lista_itens (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 listaId INTEGER NOT NULL,
                 itemId INTEGER NOT NULL,
-                quantidade INTEGER DEFAULT 1,
-                FOREIGN KEY(listaId) REFERENCES listas(id),
+                quantidadeDesejada INTEGER DEFAULT 1,   -- Quantidade que o usuário quer
+                precoEstimado REAL DEFAULT 0.0,        -- Preço estimado pelo usuário
+                comprado INTEGER DEFAULT 0,            -- 0=Não, 1=Sim (ESSENCIAL)
+                precoPago REAL,                        -- Preço real pago (pode ser NULL)
+                FOREIGN KEY(listaId) REFERENCES listas(id) ON DELETE CASCADE,
                 FOREIGN KEY(itemId) REFERENCES itens(id)
             );
         """.trimIndent()
@@ -57,48 +64,48 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
 
         //Inserindo alguns dados default
         db.execSQL("""
-        INSERT INTO itens (nome, marca, quantidade, preco, categoria) VALUES
-        ('Arroz Branco', 'Tio Joao', 0, 8.90, 'Mercearia'),
-        ('Feijão Preto', 'Turquesa', 0, 9.90, 'Mercearia'),
-        ('Azeite de Oliva Extra Virgem', 'Galo', 0, 29.90, 'Mercearia'),
-        ('Farinha de Mandioca', 'Yoki', 0, 5.90, 'Mercearia'),
-        ('Farinha de Trigo', 'Sao Braz', 0, 6.00, 'Mercearia'),
-        ('Macarrao Fettuccine', 'Paganini', 0, 0.0, 'Mercearia'),
+        INSERT INTO itens (nome, marca, precoPadrao, categoria) VALUES
+        ('Arroz Branco', 'Tio Joao', 8.90, 'Mercearia'),
+        ('Feijão Preto', 'Turquesa', 9.90, 'Mercearia'),
+        ('Azeite de Oliva Extra Virgem', 'Galo', 29.90, 'Mercearia'),
+        ('Farinha de Mandioca', 'Yoki', 5.90, 'Mercearia'),
+        ('Farinha de Trigo', 'Sao Braz', 6.00, 'Mercearia'),
+        ('Macarrao Fettuccine', 'Paganini', 0.0, 'Mercearia'),
 
-        ('Banana', 'Prata', 0, 0.0, 'Frutas e Legumes'),
-        ('Maçã', 'Gala', 0, 0.0, 'Frutas e Legumes'),
-        ('Abacaxi', '', 0, 0.0, 'Frutas e Legumes'),
-        ('Laranja', '', 0, 0.0, 'Frutas e Legumes'),
-        ('Limao', '', 0, 0.0, 'Frutas e Legumes'),
-        ('Mamao', '', 0, 0.0, 'Frutas e Legumes'),
-        ('Maracuja', '', 0, 0.0, 'Frutas e Legumes'),
-        ('Melao', '', 0, 0.0, 'Frutas e Legumes'),
-        ('Morango', '', 0, 0.0, 'Frutas e Legumes'),
-        ('Batata Inglesa', '', 0, 0.0, 'Frutas e Legumes'),
-        ('Tomate', 'Cereja', 0, 0.0, 'Frutas e Legumes'),
-        ('Cebola', '', 0, 0.0, 'Frutas e Legumes'),
+        ('Banana', 'Prata', 0.0, 'Frutas e Legumes'),
+        ('Maçã', 'Gala', 0.0, 'Frutas e Legumes'),
+        ('Abacaxi', '', 0.0, 'Frutas e Legumes'),
+        ('Laranja', '', 0.0, 'Frutas e Legumes'),
+        ('Limao', '', 0.0, 'Frutas e Legumes'),
+        ('Mamao', '', 0.0, 'Frutas e Legumes'),
+        ('Maracuja', '', 0.0, 'Frutas e Legumes'),
+        ('Melao', '', 0.0, 'Frutas e Legumes'),
+        ('Morango', '', 0.0, 'Frutas e Legumes'),
+        ('Batata Inglesa', '', 0.0, 'Frutas e Legumes'),
+        ('Tomate', 'Cereja', 0.0, 'Frutas e Legumes'),
+        ('Cebola', '', 0.0, 'Frutas e Legumes'),
 
-        ('Manteiga', 'Itacolomy', 0, 0.0, 'Frios e Congelados'),
-        ('Iogurte', '', 0, 0.0, 'Frios e Congelados'),
-        ('Requeijao', '', 0, 0.0, 'Frios e Congelados'),
-        ('Queijo Minas', '', 0, 0.0, 'Frios e Congelados'),
-        ('Queijo Coalho', '', 0, 0.0, 'Frios e Congelados'),
-        ('Presunto', '', 0, 0.0, 'Frios e Congelados'),
-        ('Carne Moida', '', 0, 0.0, 'Frios e Congelados'),
-        ('Carne Picanha', '', 0, 0.0, 'Frios e Congelados'),
-        ('Carne Musculo', '', 0, 0.0, 'Frios e Congelados'),
-        ('Carne Suina', '', 0, 0.0, 'Frios e Congelados'),
-        ('Frango Inteiro', 'Natto', 0, 0.0, 'Frios e Congelados'),
-        ('Frango Filet Peito', 'Natto', 0, 0.0, 'Frios e Congelados'),
+        ('Manteiga', 'Itacolomy', 0.0, 'Frios e Congelados'),
+        ('Iogurte', '', 0.0, 'Frios e Congelados'),
+        ('Requeijao', '', 0.0, 'Frios e Congelados'),
+        ('Queijo Minas', '', 0.0, 'Frios e Congelados'),
+        ('Queijo Coalho', '', 0.0, 'Frios e Congelados'),
+        ('Presunto', '', 0.0, 'Frios e Congelados'),
+        ('Carne Moida', '', 0.0, 'Frios e Congelados'),
+        ('Carne Picanha', '', 0.0, 'Frios e Congelados'),
+        ('Carne Musculo', '', 0.0, 'Frios e Congelados'),
+        ('Carne Suina', '', 0.0, 'Frios e Congelados'),
+        ('Frango Inteiro', 'Natto', 0.0, 'Frios e Congelados'),
+        ('Frango Filet Peito', 'Natto', 0.0, 'Frios e Congelados'),
 
-        ('Sabão em pó', 'OMO', 0, 22.0, 'Limpeza e Higiene'),
-        ('Detergente', 'Ypê', 0, 2.50, 'Limpeza e Higiene'),
+        ('Sabão em pó', 'OMO', 22.0, 'Limpeza e Higiene'),
+        ('Detergente', 'Ypê', 2.50, 'Limpeza e Higiene'),
 
-        ('Sal', 'Cisne', 0, 2.0, 'Temperos'),
-        ('Pimenta-do-reino', 'Kitano', 0, 4.5, 'Temperos'),
+        ('Sal', 'Cisne', 2.0, 'Temperos'),
+        ('Pimenta-do-reino', 'Kitano', 4.5, 'Temperos'),
 
-        ('Água mineral', 'Crystal', 0, 2.0, 'Bebidas'),
-        ('Suco de uva', 'Aurora', 0, 8.0, 'Bebidas')
+        ('Água mineral', 'Crystal', 2.0, 'Bebidas'),
+        ('Suco de uva', 'Aurora', 8.0, 'Bebidas')
     """.trimIndent())
     }
 

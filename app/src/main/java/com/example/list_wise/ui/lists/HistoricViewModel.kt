@@ -1,16 +1,15 @@
 package com.example.list_wise.ui.lists
 
-import android.content.Context
-import androidx.lifecycle.*
-import com.example.list_wise.data.database.DatabaseHelper
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.list_wise.data.model.Lista
 import com.example.list_wise.data.repository.ListRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HistoricViewModel(context: Context) : ViewModel() {
-
-    private val repository = ListRepository(DatabaseHelper(context))
+class HistoricViewModel(private val repository: ListRepository) : ViewModel() {
 
     private val _gastos = MutableLiveData<Double>()
     val gastos: LiveData<Double> = _gastos

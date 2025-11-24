@@ -15,7 +15,8 @@ import java.util.Locale
 
 class ItemAdapter(
     private val onEditItem: (Item) -> Unit,
-    private val onDeleteItem: (Item) -> Unit
+    private val onDeleteItem: (Item) -> Unit,
+    private val onCheckItem: (Item, Boolean) -> Unit
 ) : ListAdapter<Item, ItemAdapter.ItemViewHolder>(ItemDiffCallback()) {
 
     private val currencyFormatter: NumberFormat = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("pt-BR"))
@@ -56,11 +57,12 @@ class ItemAdapter(
             }
             txtItemPrice.text = precoText
 
-            // CheckBox
+            // IMPORTANTE: Evitar loop infinito ao atualizar checkbox
             chkSelect.setOnCheckedChangeListener(null) // evita reciclagem bug
             chkSelect.isChecked = item.isSelected
             chkSelect.setOnCheckedChangeListener { _, isChecked ->
                 item.isSelected = isChecked
+                onCheckItem(item, isChecked)
             }
 
             // Botões
@@ -72,16 +74,18 @@ class ItemAdapter(
                 val newState = !item.isSelected
                 item.isSelected = newState
                 chkSelect.isChecked = newState
+                onCheckItem(item, newState)
             }
         }
     }
 
-    // 🔹 Função nova: retorna somente os selecionados
+    // Função nova: retorna somente os selecionados
     fun getSelectedItems(): List<Item> = currentList.filter { it.isSelected }
     class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean =
-            /// compara a referência do objeto
-            oldItem === newItem
+            // Mesmo item de relação lista_itens
+            oldItem.id == newItem.id && oldItem.relationId == newItem.relationId
+
         override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean =
             oldItem == newItem
     }

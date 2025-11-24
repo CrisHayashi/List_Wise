@@ -1,5 +1,4 @@
 
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -38,7 +37,9 @@ android {
     }
 
     // Habilita o View Binding no Kotlin DSL
-    buildFeatures.viewBinding = true
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -58,6 +59,10 @@ dependencies {
 
     // Glide (para imagens)
     implementation(libs.glide)
+
+    // Google Maps + Location
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 
     // Testes
     testImplementation(libs.junit)

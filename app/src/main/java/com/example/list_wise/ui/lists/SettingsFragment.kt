@@ -1,6 +1,7 @@
 package com.example.list_wise.ui.lists
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.TextView
 import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import com.example.list_wise.LoginActivity
 import com.example.list_wise.R
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import java.util.*
+import java.util.Locale
 
 class SettingsFragment : Fragment() {
 
@@ -34,6 +38,10 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_settings, container, false)
+
+        // Toolbar title
+        val titleView = requireActivity().findViewById<TextView>(R.id.txtToolbarTitle)
+        titleView.text = getString(R.string.title_settings)
 
         // Referências aos componentes
         spinnerTheme = view.findViewById(R.id.spinnerTheme)
@@ -57,28 +65,38 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupDropdownAdapters() {
+        // Tema
         val themes = resources.getStringArray(R.array.theme_options)
-        val themeAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, themes)
+        val themeAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, themes)
         spinnerTheme.setAdapter(themeAdapter)
 
+        // Idioma
         val languages = resources.getStringArray(R.array.language_options)
-        val langAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, languages)
+        val langAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, languages)
         spinnerLanguage.setAdapter(langAdapter)
     }
 
     private fun setupListeners(view: View) {
         // Listener para tema
         spinnerTheme.setOnItemClickListener { parent, _, pos, _ ->
-                val selectedTheme = parent?.getItemAtPosition(pos).toString()
-                savePreference("theme", selectedTheme)
-                applyTheme(selectedTheme)
-            }
+            val selectedTheme = parent?.getItemAtPosition(pos).toString()
+            savePreference("theme", selectedTheme)
+            applyTheme(selectedTheme)
+            Snackbar.make(
+                view,
+                "Tema alterado para: $selectedTheme",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
 
         // Listener para idioma
         spinnerLanguage.setOnItemClickListener { parent, _, pos, _ ->
             val selectedLang = parent.getItemAtPosition(pos).toString()
             savePreference("language", selectedLang)
-            Snackbar.make(view, "Idioma: $selectedLang", Snackbar.LENGTH_SHORT).show()
+            applyLanguage(selectedLang, recreate = true)
+            Snackbar.make(view, "Idioma definido: $selectedLang", Snackbar.LENGTH_SHORT).show()
         }
 
         // Notificações
@@ -101,21 +119,24 @@ class SettingsFragment : Fragment() {
             // TODO: Implementar exportação real
         }
 
-        // Limpar dados
+        // Limpar dados (limpa só SharedPreferences desse fragment)
         buttonClearData.setOnClickListener {
             clearPreferences()
-            Snackbar.make(view, "Todos os dados foram apagados!", Snackbar.LENGTH_LONG).show()
             resetUI()
+            Snackbar.make(view, "Configurações resetadas!", Snackbar.LENGTH_LONG).show()
         }
 
         // Logout
         buttonLogout.setOnClickListener {
             Snackbar.make(view, "Logout realizado com sucesso", Snackbar.LENGTH_LONG).show()
-            // TODO: Redirecionar para tela de login
+            // manda para tela de login e fecha o app atual
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
         }
     }
 
-    // === PERSISTÊNCIA ===
+    // ====== PREFERÊNCIAS ======
     private fun savePreference(key: String, value: Any) {
         val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         with(prefs.edit()) {
@@ -129,14 +150,14 @@ class SettingsFragment : Fragment() {
 
     private fun loadPreferences() {
         val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val theme = prefs.getString("theme", "Sistema")
-        val language = prefs.getString("language", "Português")
+        val theme = prefs.getString("theme", "Sistema") ?: "Sistema"
+        val language = prefs.getString("language", "Português") ?: "Português"
         val notifications = prefs.getBoolean("notifications", false)
         val offline = prefs.getBoolean("offline", false)
 
         // Aplicar tema e idioma
-        applyTheme(theme!!)
-        applyLanguage(language!!)
+        applyTheme(theme)
+        applyLanguage(language, recreate = false)
 
         // Define os valores nos campos (sem disparar listener)
         val themeOptions = resources.getStringArray(R.array.theme_options)
@@ -174,15 +195,20 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun applyLanguage(language: String) {
+    private fun applyLanguage(language: String, recreate: Boolean) {
         val locale = when (language) {
             "Inglês" -> Locale("en")
             "Espanhol" -> Locale("es")
             else -> Locale("pt")
         }
         Locale.setDefault(locale)
+        val resources = requireContext().resources
         val config = resources.configuration
         config.setLocale(locale)
-        requireContext().createConfigurationContext(config)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
+        if (recreate) {
+            requireActivity().recreate()
+        }
     }
 }

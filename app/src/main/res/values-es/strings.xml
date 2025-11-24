@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="location_hint">
+        Activa la ubicación para ver supermercados cercanos.
+    </string>
+
+    <string name="enable_location">Activar ubicación</string>
+
+    <string name="location_permission_required">
+        Se requiere el permiso de ubicación para mostrar supermercados cercanos.
+    </string>
+    <string name="edit_list">Editar lista</string>
+
+</resources>

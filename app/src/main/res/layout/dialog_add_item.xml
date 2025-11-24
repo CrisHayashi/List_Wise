@@ -11,6 +11,17 @@
         android:clipToPadding="false">
 
         <EditText
+            android:id="@+id/editItemCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:hint="Categoria (ex: Mercearia, Frios)"
+            android:inputType="text"
+            android:textColor="@color/colorInputHint"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
             android:id="@+id/editItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

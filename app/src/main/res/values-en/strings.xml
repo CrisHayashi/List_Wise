@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Só precisamos traduzir as chaves novas obrigatórias -->
+    <string name="location_hint">
+        Enable location to see nearby supermarkets.
+    </string>
+
+    <string name="enable_location">Enable location</string>
+
+    <string name="location_permission_required">
+        Location permission is required to show nearby supermarkets.
+    </string>
+    <string name="edit_list">Edit list</string>
+
+</resources>

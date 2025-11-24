@@ -1,135 +1,163 @@
 package com.example.list_wise.ui.lists
 
-import android.content.Context
-import androidx.lifecycle.*
-import com.example.list_wise.data.database.DatabaseHelper
-import com.example.list_wise.data.model.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.list_wise.data.repository.ListRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.list_wise.data.model.ItemEntity
+import com.example.list_wise.data.model.Lista
+import com.example.list_wise.data.model.ListaItemRelation
 
-class ListViewModel(context: Context) : ViewModel() {
+class ListViewModel(private val repository: ListRepository) : ViewModel() {
 
-    private val repository = ListRepository(DatabaseHelper(context))
+    private val _listaDesejada = MutableLiveData<Lista?>()
+    val listaDesejada: LiveData<Lista?> = _listaDesejada
 
-    private val _categorias = MutableLiveData<List<Category>>()
+    private val _categorias = MutableLiveData<List<Category>>(emptyList())
     val categorias: LiveData<List<Category>> = _categorias
 
-    fun carregarItensAgrupadosPorCategoria() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val itens = repository.obterTodosItens()
-            val agrupados = itens.groupBy { it.categoria ?: "Sem categoria" }
+    private val _historicoListas = MutableLiveData<List<Lista>>(emptyList())
+    val historicoListas: LiveData<List<Lista>> = _historicoListas
 
-            val categoriasConvertidas = agrupados.map { (categoria, lista) ->
-                Category(
-                    name = categoria,
-                    items = lista.map { it.toUI(it.quantidade) }.toMutableList()
+    private val _totalGasto = MutableLiveData(0.0)
+    val totalGasto: LiveData<Double> = _totalGasto
+
+    //catálogo de itens (todos os itens cadastrados)
+    private val _catalogoItens = MutableLiveData<List<ItemEntity>>(emptyList())
+    val catalogoItens: LiveData<List<ItemEntity>> = _catalogoItens
+
+    init {
+        carregarListaDesejada()
+        carregarHistorico()
+        carregarCatalogo()
+    }
+
+    fun carregarListaDesejada() {
+        viewModelScope.launch (Dispatchers.IO) {
+            val lista = repository.getListaDesejadaAtiva()
+            _listaDesejada.postValue(lista)
+
+            if (lista != null) {
+                carregarItensDaListaInterno(lista.id, isHistorico = false)
+            } else {
+                _categorias.postValue(emptyList())
+                _totalGasto.postValue(0.0)
+            }
+        }
+    }
+    private fun carregarItensDaListaInterno(listaId: Int, isHistorico: Boolean) {
+        val triples = repository.obterItensDaLista(listaId)
+
+        val grouped = triples.groupBy { triple ->
+            val itemEntity = triple.first
+            itemEntity.categoria ?: "Sem Categoria"
+        }
+
+        val categoriasUi = grouped.map { (categoriaNome, listaTriples) ->
+            val items = listaTriples.map { (entity, relation, comprado) ->
+                Item(
+                    id = entity.id,
+                    relationId = relation.id,
+                    nome = entity.nome,
+                    marca = entity.marca,
+                    quantidade = relation.quantidadeDesejada,
+                    preco = if (isHistorico) {
+                        relation.precoPago ?: relation.precoEstimado
+                    } else {
+                        relation.precoEstimado
+                    },
+                    isSelected = comprado
                 )
-            }
+            }.toMutableList()
 
-            _categorias.postValue(categoriasConvertidas)
-        }
+            Category(
+                name = categoriaNome,
+                items = items,
+                expanded = true
+            )
+        }.sortedBy { it.name.lowercase() }
+
+        _categorias.postValue(categoriasUi)
+        val total = repository.calcularTotalGastoDaLista(listaId, isHistorico)
+        _totalGasto.postValue(total)
     }
 
-    private val _listasDesejadas = MutableLiveData<List<Lista>>()
-    val listasDesejadas: LiveData<List<Lista>> = _listasDesejadas
-
-    private val _listaSelecionadaId = MutableLiveData<Int>() // O ID da lista que está sendo visualizada/editada
-    val listaSelecionadaId: LiveData<Int> = _listaSelecionadaId
-
-    fun carregarTodasListasDesejadas() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val listas = repository.obterTodasListasDesejadas()
-            _listasDesejadas.postValue(listas)
-            // Se houver listas, selecione a primeira ou a mais recente
-            if (listas.isNotEmpty()) {
-                _listaSelecionadaId.postValue(listas.first().id)
-                carregarItensDaListaSelecionada(listas.first().id)
-            }
-        }
-    }
-
-    // Carregar itens de uma lista específica (desejada ou comprada)
     fun carregarItensDaListaSelecionada(listaId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val itensRelacionados = repository.obterItensDaLista(listaId)
-            val agrupados = itensRelacionados.groupBy { it.first.categoria ?: "Sem categoria" }
-
-            val categorias = agrupados.map { (categoria, lista) ->
-                Category(
-                    name = categoria,
-                    items = lista.map { (itemEntity, quantidade) -> itemEntity.toUI(quantidade) }.toMutableList()
-                )
-            }
-            _categorias.postValue(categorias)
-            _listaSelecionadaId.postValue(listaId) // Atualiza qual lista estamos vendo
-        }
-    }
-
-    // Criar uma nova Lista Desejada
-    fun criarNovaListaDesejada(nome: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val lista = Lista(nome = nome, finalizada = false, dataCriacao = "")
-            repository.inserirLista(lista) // Insere uma nova lista não finalizada
-            carregarTodasListasDesejadas() // Recarrega a lista de listas
-        }
-    }
-
-    // Finalizar Lista (adaptado para receber o ID)
-    fun finalizarLista(listaId: Int, nomeLista: List<Item>, local: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            // 1. Calcular total gasto apenas dos itens comprados
-            val totalGasto = repository.calcularTotalGastoDaLista(listaId)
-
-            // 2. Marcar a lista como finalizada (finalizada=1)
-            // TODO criar função
-            //repository.finalizarListaAtual(listaId, nomeLista, totalGasto, local)
-
-            // 3. Recarregar o estado do ViewModel (a lista finalizada sai das "desejadas")
-            carregarTodasListasDesejadas()
-        }
-    }
-
-    //AJUSTE na função toggleItemComprado (usando o ID da lista selecionada)
-    fun toggleItemComprado(item: Item, comprado: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _listaSelecionadaId.value?.let { listaId ->
-                // TODO criar funç~so
-                //repository.marcarItemNaLista(item.id, listaId, comprado)
-                // Opcional: Recarregar apenas os itens da lista para atualizar a UI, se necessário
-                carregarItensDaListaSelecionada(listaId)
-            }
+            carregarItensDaListaInterno(listaId, isHistorico = false)
         }
     }
 
     fun carregarItensDeListaFinalizada(listaId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val itensRelacionados = repository.obterItensDaLista(listaId)
-            val agrupados = itensRelacionados.groupBy { it.first.categoria ?: "Sem categoria" }
+            carregarItensDaListaInterno(listaId, isHistorico = true)
+        }
+    }
 
-            val categorias = agrupados.map { (categoria, lista) ->
-                Category(
-                    name = categoria,
-                    items = lista.map { (itemEntity, quantidade) -> itemEntity.toUI(quantidade) }.toMutableList()
-                )
+    fun marcarItemComoComprado(relationId: Int, comprado: Boolean, precoPago: Double?) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.marcarItemComoComprado(relationId, comprado, precoPago)
+            // Recarrega a lista desejada ativa
+            carregarListaDesejada()
+        }
+    }
+
+    fun finalizarLista(
+        listaId: Int,
+        dataFinalizacao: String,
+        local: String?,
+        endereco: String?
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val total = repository.calcularTotalGastoDaLista(listaId, isHistorico = true)
+            val ok = repository.finalizarListaEMigrar(
+                listaId = listaId,
+                dataFinalizacao = dataFinalizacao,
+                local = local,
+                endereco = endereco,
+                totalGasto = total
+            )
+            if (ok) {
+                carregarListaDesejada()
+                carregarHistorico()
             }
-
-            _categorias.postValue(categorias)
         }
     }
 
-    fun carregarUltimaListaFinalizada() {
+    fun carregarHistorico() {
         viewModelScope.launch(Dispatchers.IO) {
-            val ultima = repository.obterUltimaLista()
-            ultima?.let { carregarItensDeListaFinalizada(it.id) }
+            val listas = repository.obterTodasListasFinalizadas()
+            _historicoListas.postValue(listas)
         }
     }
 
-    fun adicionarItem(item: Item, categoria: String) {
+    fun adicionarItem(
+        listaId: Int,
+        itemEntity: ItemEntity,
+        quantidade: Int,
+        precoEstimado: Double
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            val itemEntity = item.toEntity().copy(categoria = categoria)
-            repository.inserirItem(itemEntity)
-            carregarItensAgrupadosPorCategoria()
+            repository.adicionarItemNaLista(
+                ListaItemRelation(
+                    listaId = listaId,
+                    itemId = itemEntity.id,
+                    quantidadeDesejada = quantidade,
+                    precoEstimado = precoEstimado
+                )
+            )
+            carregarItensDaListaInterno(listaId, isHistorico = false)
+        }
+    }
+
+    // carrega todos os itens do catálogo a partir do repositório
+    fun carregarCatalogo() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val itens = repository.obterTodosItensCatalogo()
+            _catalogoItens.postValue(itens)
         }
     }
 }

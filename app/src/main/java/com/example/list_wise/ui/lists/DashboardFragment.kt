@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.list_wise.R
@@ -32,11 +31,13 @@ class DashboardFragment : Fragment() {
         }
 
         btnWishlist.setOnClickListener {
-            Toast.makeText(requireContext(), "Abrindo listas desejadas...", Toast.LENGTH_SHORT).show()
+            // Abre a lista desejada (lista ativa)
+            findNavController().navigate(R.id.action_dashboard_to_listFragment)
         }
 
         btnPurchased.setOnClickListener {
-            Toast.makeText(requireContext(), "Abrindo listas compradas...", Toast.LENGTH_SHORT).show()
+            // Abre a tela de histórico (listas compradas)
+            findNavController().navigate(R.id.action_dashboard_to_historicFragment)
         }
     }
 }
