@@ -12,14 +12,28 @@
     <color name="colorHeader">#000000</color>
     <color name="colorOnHeader">#FFFFFF</color>
     <!-- Superfícies (cards, botões pretos) -->
-    <color name="colorSurface">#000000</color>
-    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorSurface">#000000</color>      <!-- botões pretos -->
+    <color name="colorOnSurface">#FFFFFF</color>    <!-- texto branco -->
     <!-- Texto secundário -->
     <color name="colorSecondaryText">#E0E0E0</color>
     <!-- Erro -->
     <color name="colorError">#B00020</color>
     <color name="colorOnError">#FFFFFF</color>
     <!-- Textos de EditText -->
-    <color name="colorInputText">#666666</color> <!-- texto digitado -->
+    <color name="colorInputText">#333333</color> <!-- texto digitado -->
     <color name="colorInputHint">#A0A0A0</color> <!-- hint/texto placeholder -->
+
+    <color name="colorInputIcon">#000000</color> <!-- cinza escuro -->
+    <color name="colorInputIcon1">#888888</color>
+
+    <color name="colorLoginBackground">#000000</color>   <!-- fundo da tela de login -->
+    <color name="colorLoginCard">#FFFFFF</color>         <!-- card branco do formulário -->
+
+    <!-- Configurações (cores exclusivas) -->
+    <color name="settingsCardBackground">#000000</color>   <!-- card sempre preto -->
+    <color name="settingsCardText">#FFFFFF</color>         <!-- texto branco no card -->
+    <color name="settingsButtonPrimary">#000000</color>    <!-- botão preto -->
+    <color name="settingsButtonPrimaryText">#FFFFFF</color>
+    <color name="settingsButtonDanger">#B00020</color>     <!-- já é o seu colorError -->
+    <color name="settingsButtonDangerText">#FFFFFF</color>
 </resources>

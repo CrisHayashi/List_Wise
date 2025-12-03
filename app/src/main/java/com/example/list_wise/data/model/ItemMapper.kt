@@ -15,3 +15,4 @@ fun ItemEntity.toUI(quantidade: Int): Item = Item(
     //preco = this.preco, // categoria pode ser definida à parte
     //quantidade = this.quantidade
 //)
+

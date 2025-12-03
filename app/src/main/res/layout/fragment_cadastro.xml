@@ -2,173 +2,243 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_login_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorSurface">
+    android:background="@color/colorLoginBackground"
+    tools:ignore="Overdraw">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="28dp">
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Logo -->
-        <ImageView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:src="@drawable/listwise_logo"
-            android:contentDescription="@string/listwise_image_description" />
-
-        <!-- Título -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cadastro_text"
-            android:textColor="@color/colorPrimary"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:gravity="start" />
-
-        <!-- Email -->
-        <EditText
-            android:id="@+id/txtLoginPrompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/login_prompt"
-            android:textColor="@color/colorInputText"
-            android:textColorHint="@color/colorInputHint"
-            android:drawableStart="@drawable/ico_email"
-            android:drawablePadding="10dp"
-            android:inputType="textEmailAddress"
-            android:autofillHints="username"
-            android:layout_marginTop="16dp" />
-
-        <!-- Password -->
-        <EditText
-            android:id="@+id/txtPasswordPrompt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password_prompt"
-            android:textColor="@color/colorInputText"
-            android:textColorHint="@color/colorInputHint"
-            android:drawableStart="@drawable/ico_password"
-            android:drawablePadding="10dp"
-            android:inputType="textPassword"
-            android:autofillHints="password"
-            android:layout_marginTop="16dp" />
-
-        <!-- Esqueci senha -->
-        <TextView
-            android:id="@+id/txtForgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/forgot_password_text"
-            android:layout_marginTop="2dp"
-            android:gravity="end" />
-
-        <!-- Botão Login -->
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/login_button"
-            style="@style/BotaoAzul"
-            app:layout_constraintWidth_percent="0.8"
-            android:layout_marginTop="24dp" />
-
-        <!-- Texto OR -->
-        <TextView
-            android:id="@+id/txtOr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/or_text"
-            android:textSize="14sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:gravity="center" />
-
-        <!-- Login Google -->
-        <LinearLayout
-            android:id="@+id/btnGoogleLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:background="@drawable/rounded_button"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="12dp">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ico_google16_foreground"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/google_img_desc" />
-
-            <TextView
-                android:id="@+id/btnGoogleLoginText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_google_text"
-                android:textColor="@color/colorOnSurface"
-                android:textStyle="bold"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <!-- Criar conta -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="24dp"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/txtCreatAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/create_account_text"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/btnCreatAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/create_account_btn"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:paddingStart="4dp" />
-        </LinearLayout>
-
-        <!-- Footer -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="bottom|center_horizontal"
-            android:padding="16dp"
-            android:layout_marginTop="16dp">
+            android:gravity="center_horizontal"
+            android:padding="28dp">
 
+            <!-- Logo -->
             <ImageView
-                android:id="@+id/imgFooter"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/itech"
-                android:contentDescription="@string/my_image_description" />
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/listwise_logo2"
+                android:contentDescription="@string/listwise_image_description" />
 
+            <!-- Título -->
             <TextView
-                android:id="@+id/txtFooter"
+                android:id="@+id/txtTitleCadastro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/itech_inspirationalTech"
-                android:textSize="11sp"
-                android:layout_marginTop="8dp" />
-        </LinearLayout>
+                android:layout_marginTop="16dp"
+                android:text="@string/cadastro_title"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/txtSubtitleCadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/cadastro_subtitle"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="13sp" />
+
+            <!-- Nome -->
+            <EditText
+                android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="@string/hint_name"
+                android:autofillHints="name"
+                android:textColor="@color/colorOnHeader"
+                android:textColorHint="@color/colorInputHint"
+                android:inputType="textPersonName"
+                android:minHeight="48dp" />
+
+            <!-- E-mail -->
+            <EditText
+                android:id="@+id/txtLoginPrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/login_prompt"
+                android:textColor="@color/colorOnHeader"
+                android:textColorHint="@color/colorInputHint"
+                android:drawableStart="@drawable/ico_email"
+                android:drawablePadding="10dp"
+                android:inputType="textEmailAddress"
+                android:autofillHints="username"
+                android:minHeight="48dp" />
+
+            <!-- Senha -->
+            <EditText
+                android:id="@+id/txtPasswordPrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/password_prompt"
+                android:textColor="@color/colorOnHeader"
+                android:textColorHint="@color/colorInputHint"
+                android:drawableStart="@drawable/ico_password"
+                android:drawablePadding="10dp"
+                android:inputType="textPassword"
+                android:autofillHints="password"
+                android:minHeight="48dp" />
+
+            <!-- Sexo -->
+            <EditText
+                android:id="@+id/editSexo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/hint_sexo"
+                android:autofillHints="gender"
+                android:textColor="@color/colorOnHeader"
+                android:textColorHint="@color/colorInputHint"
+                android:inputType="textPersonName"
+                android:minHeight="48dp" />
+
+            <!-- Profissão -->
+            <EditText
+                android:id="@+id/editProfissao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/hint_profissao"
+                android:autofillHints="jobTitle"
+                android:textColor="@color/colorOnHeader"
+                android:textColorHint="@color/colorInputHint"
+                android:inputType="textCapWords"
+                android:minHeight="48dp" />
+
+            <!-- Idade -->
+            <EditText
+                android:id="@+id/editIdade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/hint_idade"
+                android:autofillHints="age"
+                android:textColor="@color/colorOnHeader"
+                android:textColorHint="@color/colorInputHint"
+                android:inputType="number"
+                android:minHeight="48dp" />
+
+            <!-- Botão Criar conta -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/create_account_btn"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textColor="@color/colorOnPrimary"
+                android:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="24dp" />
+
+            <!-- Divider "ou" -->
+            <TextView
+                android:id="@+id/txtOr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/or_text"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="14sp" />
+
+            <!-- Login Google (opcional) -->
+            <LinearLayout
+                android:id="@+id/btnGoogleLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="12dp"
+                android:background="@drawable/rounded_button"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ico_google16_foreground"
+                    android:contentDescription="@string/google_img_desc" />
+
+                <TextView
+                    android:id="@+id/btnGoogleLoginText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_google_text"
+                    android:textColor="@color/colorOnSurface"
+                    android:textStyle="bold"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Voltar para login -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/txtAlreadyHaveAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/created_account_btn"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/btnGoToLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_button1"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!-- Footer -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="bottom|center_horizontal"
+                android:padding="16dp"
+                android:layout_marginTop="16dp">
+
+                <ImageView
+                    android:id="@+id/imgFooter"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/itech"
+                    android:contentDescription="@string/my_image_description" />
+
+                <TextView
+                    android:id="@+id/txtFooter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/itech_inspirationalTech"
+                    android:textSize="11sp"
+                    android:textColor="@color/colorSecondaryText"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

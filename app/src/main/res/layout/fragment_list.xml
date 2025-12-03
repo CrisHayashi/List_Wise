@@ -38,7 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:imeOptions="actionSearch" />
+            android:imeOptions="actionSearch"
+            android:textColor="@color/colorOnBackground"
+            android:textColorHint="@color/colorInputHint" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- RecyclerView (Categorias + Itens) -->

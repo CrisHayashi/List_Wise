@@ -6,11 +6,15 @@ import com.example.list_wise.data.database.getStringOrNull
 import com.example.list_wise.data.model.ItemEntity
 import com.example.list_wise.data.model.Lista
 import com.example.list_wise.data.model.ListaItemRelation
+import android.util.Log
+
 
 // Constantes úteis
 private const val TABLE_LISTAS = "listas"
 private const val TABLE_ITENS = "itens"
 private const val TABLE_LISTA_ITENS = "lista_itens"
+
+private const val DEFAULT_TOP_ITEMS_LIMIT = 5
 
 class ListRepository(private val dbHelper: DatabaseHelper) {
 
@@ -151,11 +155,34 @@ class ListRepository(private val dbHelper: DatabaseHelper) {
         return db.update(TABLE_LISTA_ITENS, values, "id = ?", arrayOf(relationId.toString()))
     }
 
+    companion object {
+        private const val TAG = "ListaRepository"
+    }
+
+
     // Deleta a relação lista_itens (item sai da lista)
     fun deletarItemDaLista(relationId: Int): Int {
         val db = dbHelper.writableDatabase
-        return db.delete(TABLE_LISTA_ITENS, "id = ?", arrayOf(relationId.toString()))
+
+        // Log antes de tentar deletar
+        Log.d(TAG, "Tentando deletar item da lista com relationId=$relationId")
+
+        val rowsDeleted = db.delete(
+            TABLE_LISTA_ITENS,
+            "id = ?",
+            arrayOf(relationId.toString())
+        )
+
+        // Log depois do delete
+        Log.d(TAG, "Resultado delete: rowsDeleted=$rowsDeleted para relationId=$relationId")
+
+        // Se quiser, loga um aviso se nada foi apagado
+        if (rowsDeleted == 0) {
+            Log.w(TAG, "Nenhum registro deletado. Verifique se o relationId=$relationId existe na tabela.")
+        }
+        return rowsDeleted
     }
+
 
 
     // Traz TODO o catálogo de itens + info se ele já está na lista ativa
@@ -320,7 +347,31 @@ class ListRepository(private val dbHelper: DatabaseHelper) {
     // Relacionar item a uma lista (com quantidade, preço estimado)
     fun adicionarItemNaLista(relation: ListaItemRelation): Long {
         val db = dbHelper.writableDatabase
-        val values = ContentValues().apply {
+        // 1) Verifica se já existe uma relação listaId + itemId
+        val cursor = db.rawQuery(
+            "SELECT id, quantidadeDesejada FROM $TABLE_LISTA_ITENS WHERE listaId = ? AND itemId = ?",
+            arrayOf(relation.listaId.toString(), relation.itemId.toString())
+        )
+
+        cursor.use { c ->
+            if (c.moveToFirst()) {
+                // Já existe: só atualiza a quantidade (soma)
+                val relationId = c.getInt(0)
+                val quantidadeAtual = c.getInt(1)
+
+                val values = ContentValues().apply {
+                    put("quantidadeDesejada", quantidadeAtual + relation.quantidadeDesejada)
+                    put("precoEstimado", relation.precoEstimado)
+                    // mantemos os outros campos como estavam (comprado, precoPago)
+                }
+
+                db.update(TABLE_LISTA_ITENS, values, "id = ?", arrayOf(relationId.toString()))
+                return relationId.toLong()
+            }
+        }
+
+        // 2) Não existia: insere normal
+        val valuesInsert = ContentValues().apply {
             put("listaId", relation.listaId)
             put("itemId", relation.itemId)
             put("quantidadeDesejada", relation.quantidadeDesejada)
@@ -328,7 +379,8 @@ class ListRepository(private val dbHelper: DatabaseHelper) {
             put("comprado", if (relation.comprado) 1 else 0)
             if (relation.precoPago != null) put("precoPago", relation.precoPago) else putNull("precoPago")
         }
-        return db.insert(TABLE_LISTA_ITENS, null, values)
+
+        return db.insert(TABLE_LISTA_ITENS, null, valuesInsert)
     }
 
     // Atualiza status/preço pago do item durante a compra (RF004)
@@ -441,7 +493,7 @@ class ListRepository(private val dbHelper: DatabaseHelper) {
     }
 
     // Obter os itens mais comprados (por frequência de uso)
-    fun obterItensMaisComprados(limit: Int = 5): List<String> {
+    fun obterItensMaisComprados(limit: Int = DEFAULT_TOP_ITEMS_LIMIT): List<String> {
         val db = dbHelper.readableDatabase
         // Frequência baseada em ITENS MARCADOS COMO COMPRADOS (comprado = 1) no histórico.
         val query = """

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="MissingTranslation">>
-
+    tools:ignore="MissingTranslation">
 
     <!-- ===================== APP / GERAL ===================== -->
     <string name="app_name">List Wise</string>
@@ -27,16 +26,18 @@
     <string name="title_historic">Histórico</string>
     <string name="title_store_locator">Localização</string>
     <string name="title_settings">Configurações</string>
-    <string name="config_title">Configuração</string>
+    <string name="dashboard_welcome_generic">Olá!</string>
 
     <!-- Texto da tela de localização -->
     <string name="location_hint">
         Ative a localização para ver supermercados próximos.
     </string>
+    <string name="location_hint_radius">
+        Exibindo supermercados em um raio de %1$d km da sua localização atual.
+    </string>
 
     <!-- ===================== BOTÕES / AÇÕES ===================== -->
     <string name="btn_create_list">Criar Lista</string>
-    <string name="btn_finalize">Finalizar</string>
     <string name="btn_purchased">Listas Compradas</string>
     <string name="btn_save">Salvar</string>
     <string name="btn_wishlist">Listas Desejadas</string>
@@ -56,13 +57,14 @@
     <string name="hint_item_price">Preço</string>
     <string name="hint_item_quantity">Quantidade</string>
     <string name="developing_screen_message">Tela em desenvolvimento</string>
+    <string name="hint_item_category">Categoria (ex: Mercearia, Frios)</string>
 
     <string name="location_permission_required">
         Permissão de localização é necessária para mostrar mercados próximos.
     </string>
 
     <!-- Descrições de ícones de item -->
-    <string name="desc_add_item">Adicionar Item</string>
+    <string name="desc_add_item">Adicionar item</string>
     <string name="desc_delete_item">Excluir item</string>
     <string name="desc_edit_item">Editar item</string>
 
@@ -75,8 +77,20 @@
     <string name="purchased_date_format">Finalizada em %1$s</string>
     <string name="purchased_location_format">Local: %1$s</string>
     <string name="purchased_total_format">Total gasto: R$ %.2f</string>
+    <string name="monthly_expense_format">R$ %.2f</string>
+    <string name="historic_items_count">%1$d Itens</string>
+    <string name="list_location_not_informed">Local não informado</string>
+    <string name="list_address_not_informed">Endereço não informado</string>
+    <string name="most_purchased_items_format">Itens mais comprados: %1$s</string>
+    <string name="historic_monthly_expense_label">Gastos este mês</string>
+    <string name="historic_completed_lists_label">Listas finalizadas</string>
+    <string name="most_purchased_title">Itens mais comprados</string>
+    <string name="most_purchased_subtitle_hint">Baseado no seu histórico de compras</string>
+    <string name="historic_no_history">Nenhum histórico ainda. Complete algumas listas para ver suas estatísticas!</string>
+    <string name="historic_create_list_button">+ Criar lista</string>
+    <string name="historic_completed_lists_subtitle">Reutilize listas já finalizadas</string>
 
-    <!-- Exemplos / textos estáticos (se quiser pode usar só enquanto prototipa) -->
+    <!-- Exemplos / textos estáticos -->
     <string name="purchased_list_title">Lista do mês</string>
     <string name="purchased_finalized_example">Finalizada em 10/11/2025</string>
     <string name="purchased_location_label">Local:</string>
@@ -101,6 +115,8 @@
     <string name="password_prompt">Senha</string>
     <string name="forgot_password_text">Esqueceu a senha?</string>
     <string name="or_text">ou</string>
+    <string name="created_account_btn">Já tem Conta?</string>
+    <string name="login_button1">Fazer login</string>
 
     <!-- Mensagens de login/cadastro -->
     <string name="cadastro_error_message">Por favor, preencha todos os campos.</string>
@@ -127,4 +143,33 @@
     <!-- Ícones genéricos -->
     <string name="icon_expand_description">Ícone para expandir opções</string>
 
+    <string name="hint_name">Nome</string>
+    <string name="hint_sexo">Sexo</string>
+    <string name="hint_profissao">Profissão</string>
+    <string name="hint_idade">Idade</string>
+
+    <string name="hint_store_name">Local da compra (ex: Atacadão)</string>
+    <string name="hint_store_address">Endereço (opcional)</string>
+    <string name="use_current_location">Usar minha localização</string>
+
+    <!-- ===================== MENSAGENS / SNACKBARS ===================== -->
+    <string name="snackbar_theme_changed">Tema alterado para: %1$s</string>
+    <string name="snackbar_language_changed">Idioma definido: %1$s</string>
+
+    <string name="snackbar_notifications_on">Notificações ativadas</string>
+    <string name="snackbar_notifications_off">Notificações desativadas</string>
+
+    <string name="snackbar_offline_on">Modo offline ativado</string>
+    <string name="snackbar_offline_off">Modo offline desativado</string>
+
+    <string name="snackbar_exporting_data">Exportando dados…</string>
+    <string name="snackbar_settings_reset">Configurações resetadas!</string>
+    <string name="snackbar_logout_success">Logout realizado com sucesso</string>
+
+    <string name="dashboard_welcome_named">Olá, %1$s!</string>
+
+    <string name="cadastro_title">Criar conta</string>
+    <string name="cadastro_subtitle">Preencha seus dados para usar o List Wise</string>
+
 </resources>
+

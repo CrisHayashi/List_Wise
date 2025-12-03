@@ -1,15 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- ===================== APP / GENERAL ===================== -->
+    <string name="app_name">List Wise</string>
+    <string name="app_version">List Wise v1.0.3</string>
+    <string name="app_footer">Hecho con cariño para facilitar tus compras.</string>
+
+    <!-- Logos / Imágenes -->
+    <string name="listwise_image_description">Logo de la aplicación</string>
+    <string name="my_image_description">Logo del pie de página</string>
+    <string name="company_logo_description">Logo de la empresa</string>
+    <string name="google_img_desc">Ícono de Google</string>
+    <string name="itech_inspirationalTech">inspirational Tech</string>
+
+    <!-- ===================== TÍTULOS DE PANTALLAS / SECCIONES ===================== -->
+    <string name="title_dashboard">Menú</string>
+    <string name="title_list">Lista</string>
+    <string name="title_create_list">Crear nueva lista</string>
+    <string name="title_desired_lists">Listas deseadas</string>
+    <string name="title_purchased_lists">Historial de compras</string>
+    <string name="title_purchased_list">Lista finalizada</string>
+    <string name="title_shopping">Modo compra</string>
+    <string name="title_historic">Historial</string>
+    <string name="title_store_locator">Ubicación</string>
+    <string name="title_settings">Configuración</string>
+    <string name="dashboard_welcome_generic">¡Hola!</string>
+
+    <!-- Texto de la pantalla de ubicación -->
     <string name="location_hint">
         Activa la ubicación para ver supermercados cercanos.
     </string>
-
-    <string name="enable_location">Activar ubicación</string>
-
-    <string name="location_permission_required">
-        Se requiere el permiso de ubicación para mostrar supermercados cercanos.
+    <string name="location_hint_radius">
+        Mostrando supermercados en un radio de %1$d km de tu ubicación actual.
     </string>
+
+    <!-- ===================== BOTONES / ACCIONES ===================== -->
+    <string name="btn_create_list">Crear lista</string>
+    <string name="btn_purchased">Listas compradas</string>
+    <string name="btn_save">Guardar</string>
+    <string name="btn_wishlist">Listas deseadas</string>
+    <string name="action_go_to_shopping">Ir de compras</string>
+    <string name="finish_purchase">Finalizar compra</string>
+    <string name="adicionar_item">Agregar ítem</string>
+    <string name="expandir_categoria">Expandir</string>
+    <string name="enable_location">Activar ubicación</string>
     <string name="edit_list">Editar lista</string>
 
+    <!-- ===================== LISTAS / ÍTEMS / PLACEHOLDERS ===================== -->
+    <string name="hint_list_name">Nombre de la lista</string>
+    <string name="hint_search_item">Buscar ítem</string>
+    <string name="nome_item">Nombre del ítem</string>
+    <string name="categoria">Categoría</string>
+    <string name="hint_item_brand">Marca (opcional)</string>
+    <string name="hint_item_price">Precio</string>
+    <string name="hint_item_quantity">Cantidad</string>
+    <string name="developing_screen_message">Pantalla en desarrollo</string>
+    <string name="hint_item_category">Categoría (ej.: Abarrotes, Lácteos)</string>
+
+    <string name="location_permission_required">
+        El permiso de ubicación es necesario para mostrar supermercados cercanos.
+    </string>
+
+    <!-- Descripciones de íconos de ítem -->
+    <string name="desc_add_item">Agregar ítem</string>
+    <string name="desc_delete_item">Eliminar ítem</string>
+    <string name="desc_edit_item">Editar ítem</string>
+
+    <!-- ===================== MODO COMPRA ===================== -->
+    <string name="shopping_list_title_default">Mi lista de compras</string>
+    <string name="shopping_hint">Marca los ítems a medida que los compres.</string>
+
+    <!-- ===================== HISTORIAL / LISTA FINALIZADA ===================== -->
+    <!-- Formatos dinámicos -->
+    <string name="purchased_date_format">Finalizada el %1$s</string>
+    <string name="purchased_location_format">Lugar: %1$s</string>
+    <string name="purchased_total_format">Total gastado: R$ %.2f</string>
+    <string name="monthly_expense_format">R$ %.2f</string>
+    <string name="historic_items_count">%1$d ítems</string>
+    <string name="list_location_not_informed">Lugar no informado</string>
+    <string name="list_address_not_informed">Dirección no informada</string>
+    <string name="most_purchased_items_format">Ítems más comprados: %1$s</string>
+    <string name="historic_monthly_expense_label">Gastos este mes</string>
+    <string name="historic_completed_lists_label">Listas finalizadas</string>
+    <string name="most_purchased_title">Ítems más comprados</string>
+    <string name="most_purchased_subtitle_hint">Basado en tu historial de compras</string>
+    <string name="historic_no_history">Aún no hay historial. ¡Completa algunas listas para ver tus estadísticas!</string>
+    <string name="historic_create_list_button">+ Crear lista</string>
+    <string name="historic_completed_lists_subtitle">Reutiliza listas ya finalizadas</string>
+
+    <!-- Ejemplos / textos estáticos -->
+    <string name="purchased_list_title">Lista del mes</string>
+    <string name="purchased_finalized_example">Finalizada el 10/11/2025</string>
+    <string name="purchased_location_label">Lugar:</string>
+    <string name="purchased_total_example">Total gastado: R$ 0,00</string>
+    <string name="purchased_items_title">Ítems comprados</string>
+
+    <!-- ===================== NAVEGACIÓN / BOTTOM NAV ===================== -->
+    <string name="desc_nav_alarm">Abrir historial</string>
+    <string name="desc_nav_cart">Abrir carrito</string>
+    <string name="desc_nav_list">Abrir listas</string>
+    <string name="desc_nav_location">Abrir ubicación</string>
+    <string name="desc_nav_settings">Abrir configuración</string>
+
+    <!-- ===================== LOGIN / REGISTRO ===================== -->
+    <string name="cadastro_text">Registro</string>
+    <string name="create_account_text">¿No tienes cuenta?</string>
+    <string name="create_account_btn">Crear cuenta</string>
+    <string name="enter_text">Iniciar sesión</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="login_google_text">Iniciar con Google</string>
+    <string name="login_prompt">Correo electrónico</string>
+    <string name="password_prompt">Contraseña</string>
+    <string name="forgot_password_text">¿Olvidaste tu contraseña?</string>
+    <string name="or_text">o</string>
+    <string name="created_account_btn">¿Ya tienes cuenta?</string>
+    <string name="login_button1">Iniciar sesión</string>
+
+    <!-- Mensajes de login/registro -->
+    <string name="cadastro_error_message">Por favor, completa todos los campos.</string>
+    <string name="cadastro_success_message">¡Registro realizado con éxito!</string>
+    <string name="login_empty_message">Completa todos los campos.</string>
+    <string name="login_found_message">Ya existe un usuario con este correo electrónico.</string>
+    <string name="login_success_message">¡Inicio de sesión exitoso!</string>
+    <string name="login_error_message">Usuario o contraseña incorrectos.</string>
+
+    <!-- ===================== CONFIGURACIÓN / PREFERENCIAS ===================== -->
+    <string name="config_subtitle">Personaliza tu experiencia en la app</string>
+
+    <string name="appearance">🌗 Apariencia</string>
+    <string name="language">🌍 Idioma</string>
+    <string name="choose_language">Portugués</string>
+    <string name="choose_theme">Sistema</string>
+
+    <string name="notifications_push">🔔 Notificaciones push</string>
+    <string name="offline_mode">🌐 Modo sin conexión</string>
+    <string name="clear_all_data">Borrar todos los datos</string>
+    <string name="export_data">Exportar datos</string>
+    <string name="logout">Cerrar sesión</string>
+
+    <!-- Íconos genéricos -->
+    <string name="icon_expand_description">Ícono para expandir opciones</string>
+
+    <string name="hint_name">Nombre</string>
+    <string name="hint_sexo">Género</string>
+    <string name="hint_profissao">Profesión</string>
+    <string name="hint_idade">Edad</string>
+
+    <string name="hint_store_name">Lugar de la compra (ej.: Atacadão)</string>
+    <string name="hint_store_address">Dirección (opcional)</string>
+    <string name="use_current_location">Usar mi ubicación</string>
+
+    <!-- ===================== MENSAJES / SNACKBARS ===================== -->
+    <string name="snackbar_theme_changed">Tema cambiado a: %1$s</string>
+    <string name="snackbar_language_changed">Idioma configurado en: %1$s</string>
+
+    <string name="snackbar_notifications_on">Notificaciones activadas</string>
+    <string name="snackbar_notifications_off">Notificaciones desactivadas</string>
+
+    <string name="snackbar_offline_on">Modo sin conexión activado</string>
+    <string name="snackbar_offline_off">Modo sin conexión desactivado</string>
+
+    <string name="snackbar_exporting_data">Exportando datos…</string>
+    <string name="snackbar_settings_reset">¡Configuraciones restablecidas!</string>
+    <string name="snackbar_logout_success">Cierre de sesión exitoso</string>
+
+    <string name="dashboard_welcome_named">¡Hola, %1$s!</string>
+
 </resources>
+

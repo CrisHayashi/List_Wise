@@ -4,18 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="6dp"
+    android:paddingVertical="8dp"
     android:paddingHorizontal="8dp">
 
     <!-- Checkbox para selecionar item -->
     <CheckBox
         android:id="@+id/chkSelectItem"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <!-- Nome do item -->
     <TextView
@@ -25,31 +25,28 @@
         android:text="@string/nome_item"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:textColor="@color/colorSurface"
+        android:textColor="@color/colorOnBackground"
         app:layout_constraintStart_toEndOf="@id/chkSelectItem"
         app:layout_constraintEnd_toStartOf="@id/txtItemPrice"
         app:layout_constraintTop_toTopOf="parent"
         android:ellipsize="end"
         android:maxLines="1"
-        app:layout_constraintHorizontal_bias="0"
-        android:scrollHorizontally="false"
-        android:singleLine="true"/>
+        android:singleLine="true" />
 
-    <!-- Linha de detalhes opcionais -->
+    <!-- Detalhes (marca, quantidade, etc.) -->
     <TextView
         android:id="@+id/txtItemDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="13sp"
-        android:textColor="@color/colorSurface"
+        android:textColor="@color/colorOnBackground"
         app:layout_constraintTop_toBottomOf="@id/txtItemName"
-        app:layout_constraintStart_toEndOf="@id/chkSelectItem"
+        app:layout_constraintStart_toStartOf="@id/txtItemName"
         app:layout_constraintEnd_toStartOf="@id/txtItemPrice"
         android:layout_marginTop="2dp"
-        android:lineSpacingExtra="2dp"
         android:maxLines="2"
-        android:ellipsize="end"/>
+        android:ellipsize="end" />
 
     <!-- Preço -->
     <TextView
@@ -58,45 +55,46 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="14sp"
-        android:textColor="@color/colorSurface"
+        android:textStyle="bold"
+        android:textColor="@color/colorOnBackground"
         app:layout_constraintEnd_toStartOf="@id/btnEditItem"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/txtItemDetails"
-        android:layout_marginEnd="8dp"
-        android:ellipsize="none"
-        android:scrollHorizontally="false"/>
+        app:layout_constraintBottom_toTopOf="@id/divider"
+        android:layout_marginEnd="8dp" />
 
     <!-- Botão Editar -->
     <ImageButton
         android:id="@+id/btnEditItem"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ico_edit"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/desc_edit_item"
         app:layout_constraintEnd_toStartOf="@id/btnDeleteItem"
-        app:layout_constraintTop_toTopOf="@+id/chkSelectItem"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/divider" />
 
     <!-- Botão Excluir -->
     <ImageButton
         android:id="@+id/btnDeleteItem"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ico_delete"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/desc_delete_item"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/chkSelectItem"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/divider" />
 
     <!-- Linha divisória -->
     <View
+        android:id="@+id/divider"
         android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="#E0E0E0"
-        app:layout_constraintTop_toBottomOf="@id/txtItemPrice"
+        android:layout_height="1dp"
+        android:background="@color/colorSecondaryText"
+        app:layout_constraintTop_toBottomOf="@id/txtItemDetails"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="6dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="6dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

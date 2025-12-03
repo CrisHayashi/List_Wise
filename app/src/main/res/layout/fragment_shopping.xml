@@ -32,6 +32,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Container dos campos de Local + Endereço + botão de localização -->
+    <LinearLayout
+        android:id="@+id/layoutStoreContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textShoppingHint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Nome do local da compra -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutStoreName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_store_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editStoreName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_store_name"
+                android:textColor="@color/colorOnBackground"
+                android:textColorHint="@color/colorInputHint"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Endereço -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutStoreAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="@string/hint_store_address">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editStoreAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_store_address"
+                android:textColor="@color/colorOnBackground"
+                android:textColorHint="@color/colorInputHint"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botão para usar a localização atual -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUseLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/use_current_location"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textColor="@color/colorOnHeader"
+            android:backgroundTint="@color/colorSurface"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ico_location"
+            app:iconTint="@color/colorOnHeader"
+            app:iconPadding="8dp"/>
+    </LinearLayout>
+
     <!-- Lista de categorias + itens (mesmo adapter da tela de lista) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCategories"
@@ -39,7 +100,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/textShoppingHint"
+        app:layout_constraintTop_toBottomOf="@id/layoutStoreContainer"
         app:layout_constraintBottom_toTopOf="@+id/dividerBottom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -58,8 +119,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- RODAPÉ COM OS DOIS BOTÕES LADO A LADO -->
-    <!-- btnEditList DENTRO do bottomBar junto com btnFinishPurchase -->
+    <!-- Rodapé com os dois botões -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="0dp"
@@ -83,8 +143,8 @@
             android:textColor="@color/colorOnSurface"
             android:layout_marginEnd="16dp"/>
 
-            <!-- Botão de finalizar compra -->
-            <com.google.android.material.button.MaterialButton
+        <!-- Botão de finalizar compra -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFinishPurchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

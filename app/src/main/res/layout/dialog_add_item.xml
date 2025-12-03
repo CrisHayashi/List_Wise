@@ -16,9 +16,10 @@
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:padding="12dp"
-            android:hint="Categoria (ex: Mercearia, Frios)"
+            android:hint="@string/hint_item_category"
             android:inputType="text"
             android:textColor="@color/colorInputHint"
+            android:autofillHints="category"
             android:layout_marginTop="8dp"/>
 
         <EditText

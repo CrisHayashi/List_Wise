@@ -18,7 +18,7 @@
             app:drawableStartCompat="@drawable/ico_settings"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
-            android:text="@string/config_title"
+            android:text="@string/title_settings"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -40,6 +40,7 @@
         <!-- Botão Logout -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonLogout"
+            style="@style/Widget.ListWise.ButtonSurface"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:text="@string/logout"
@@ -57,8 +58,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/settingsCardBackground"
             app:layout_constraintTop_toBottomOf="@id/buttonLogout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -74,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/appearance"
                     android:textStyle="bold"
-                    android:textColor="@color/colorOnBackground"
+                    android:textColor="@color/settingsCardText"
                     android:textSize="16sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -82,6 +85,7 @@
                 <!-- Spinner Aparência (Material style) -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputThemeLayout"
+                    style="@style/Widget.ListWise.ExposedDropdown"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -96,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="none"
                         android:hint="@string/choose_theme"
-                        android:textColor="@color/colorOnBackground"
+                        android:textColor="@color/settingsCardText"
                         android:drawableEnd="@drawable/ico_expand" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,8 +113,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/settingsCardBackground"
             app:layout_constraintTop_toBottomOf="@id/cardAppearance"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -126,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/language"
                     android:textStyle="bold"
-                    android:textColor="@color/colorOnBackground"
+                    android:textColor="@color/settingsCardText"
                     android:textSize="16sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
@@ -134,6 +140,7 @@
                 <!-- Spinner Idioma (Material style) -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputLanguageLayout"
+                    style="@style/Widget.ListWise.ExposedDropdown"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -148,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="none"
                         android:hint="@string/choose_language"
-                        android:textColor="@color/colorOnBackground"
+                        android:textColor="@color/settingsCardText"
                         android:drawableEnd="@drawable/ico_expand" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,8 +168,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/settingsCardBackground"
             app:layout_constraintTop_toBottomOf="@id/cardLanguage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -178,7 +187,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/notifications_push"
                     android:textStyle="bold"
-                    android:textColor="@color/colorOnBackground"
+                    android:textColor="@color/settingsCardText"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -200,8 +209,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/settingsCardBackground"
             app:layout_constraintTop_toBottomOf="@id/cardNotifications"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -216,7 +227,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/offline_mode"
-                    android:textColor="@color/colorOnBackground"
+                    android:textColor="@color/settingsCardText"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -241,8 +252,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:layout_marginTop="8dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/settingsCardBackground"
             app:layout_constraintTop_toBottomOf="@id/cardOffline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -258,7 +271,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/export_data"
                     android:textColor="@color/colorOnPrimary"
-                    android:backgroundTint="@color/colorSurface"
+                    android:backgroundTint="@color/colorPrimary"
                     app:cornerRadius="12dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/buttonClearData"
@@ -272,8 +285,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/clear_all_data"
-                    android:textColor="@color/colorOnPrimary"
-                    android:backgroundTint="@color/colorError"
+                    android:textColor="@color/settingsButtonDangerText"
+                    android:backgroundTint="@color/settingsButtonDanger"
                     app:cornerRadius="12dp"
                     app:layout_constraintStart_toEndOf="@id/buttonExport"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -319,6 +332,7 @@
             app:layout_constraintTop_toBottomOf="@id/textFooter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="24dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

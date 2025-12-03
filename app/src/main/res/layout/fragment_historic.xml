@@ -11,6 +11,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Título da tela -->
+        <TextView
+            android:id="@+id/txtHistoricTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/title_purchased_lists"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp"/>
+
         <!-- ====== CARTÕES DO TOPO (GASTOS / LISTAS FINALIZADAS) ====== -->
         <!-- Cartão: Gastos este mês -->
         <androidx.cardview.widget.CardView
@@ -20,7 +33,7 @@
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtHistoricTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/cardCompletedLists"
             app:layout_constraintHorizontal_chainStyle="spread"
@@ -45,7 +58,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gastos este mês"
+                    android:text="@string/historic_monthly_expense_label"
                     android:textSize="14sp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -58,7 +71,7 @@
             android:layout_marginStart="8dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtHistoricTitle"
             app:layout_constraintStart_toEndOf="@id/cardMonthlyExpense"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1">
@@ -82,13 +95,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Listas finalizadas"
+                    android:text="@string/historic_completed_lists_label"
                     android:textSize="14sp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <!-- ====== CARD "ITENS MAIS COMPRADOS" ====== -->
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMostPurchased"
             android:layout_width="0dp"
@@ -110,7 +122,7 @@
                     android:id="@+id/txtMostPurchasedTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Itens mais comprados"
+                    android:text="@string/most_purchased_title"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
 
@@ -118,7 +130,7 @@
                     android:id="@+id/txtMostPurchasedSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Baseado no seu histórico de compras"
+                    android:text="@string/most_purchased_subtitle_hint"
                     android:textSize="14sp"
                     android:layout_marginTop="4dp"/>
 
@@ -126,7 +138,7 @@
                     android:id="@+id/txtNoHistory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nenhum histórico ainda. Complete algumas listas, para ver suas estatísticas!"
+                    android:text="@string/historic_no_history"
                     android:textSize="14sp"
                     android:textColor="@android:color/darker_gray"
                     android:layout_marginTop="12dp"/>
@@ -136,12 +148,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="+ Criar Lista"
+                    android:text="@string/historic_create_list_button"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:paddingLeft="24dp"
                     android:paddingRight="24dp"
-                    android:backgroundTint="@color/colorOnBackground"
+                    android:backgroundTint="@color/colorSurface"
                     android:textColor="@color/colorOnPrimary"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -170,7 +182,7 @@
                     android:id="@+id/txtCompletedListsTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Listas finalizadas"
+                    android:text="@string/historic_completed_lists_label"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
 
@@ -178,7 +190,7 @@
                     android:id="@+id/txtCompletedListsSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reutilize listas já finalizadas"
+                    android:text="@string/historic_completed_lists_subtitle"
                     android:textSize="14sp"
                     android:textColor="@android:color/darker_gray"
                     android:layout_marginTop="4dp"/>

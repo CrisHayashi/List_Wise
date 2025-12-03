@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.navigation.safeargs)
+
+    // Detekt - análise estática de código Kotlin
+    id("io.gitlab.arturbosch.detekt") version "1.23.7"
 }
 
 android {
@@ -42,6 +45,12 @@ android {
     }
 }
 
+// Configuração básica do Detekt
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+}
+
 dependencies {
     // AndroidX e Material
     implementation(libs.androidx.core.ktx)
@@ -60,7 +69,8 @@ dependencies {
     // Glide (para imagens)
     implementation(libs.glide)
 
-    // Google Maps + Location
+    // Google Auth + Google Maps + Location
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.3.0")
 

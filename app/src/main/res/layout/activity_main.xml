@@ -12,7 +12,7 @@
         android:id="@+id/headerBackground"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:background="@color/colorOnBackground"
+        android:background="@color/colorHeader"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -49,6 +49,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/colorBackground"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"
         app:layout_constraintTop_toBottomOf="@id/logoImageView"

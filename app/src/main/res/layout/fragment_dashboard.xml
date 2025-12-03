@@ -4,12 +4,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     android:padding="50dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <!-- Texto de boas-vindas -->
+        <TextView
+            android:id="@+id/textWelcome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/dashboard_welcome_generic"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorOnBackground"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <!-- Botão: Criar Lista -->
         <com.google.android.material.button.MaterialButton
@@ -28,11 +41,13 @@
             android:backgroundTint="@color/colorSurface"
             app:cornerRadius="12dp"
             app:iconTint="@color/colorOnPrimary"
-            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/colorPrimary2"
+            app:strokeWidth="1dp"
+            app:layout_constraintTop_toBottomOf="@id/textWelcome"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="48dp"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="32dp" />
 
         <!-- Botão: Listas Desejadas -->
         <com.google.android.material.button.MaterialButton
@@ -51,11 +66,13 @@
             android:backgroundTint="@color/colorSurface"
             app:cornerRadius="12dp"
             app:iconTint="@color/colorOnPrimary"
+            app:strokeColor="@color/colorPrimary2"
+            app:strokeWidth="1dp"
             app:layout_constraintTop_toBottomOf="@id/btnCreateList"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="32dp" />
 
         <!-- Botão: Listas Compradas -->
         <com.google.android.material.button.MaterialButton
@@ -74,6 +91,8 @@
             android:backgroundTint="@color/colorSurface"
             app:cornerRadius="12dp"
             app:iconTint="@color/colorOnPrimary"
+            app:strokeColor="@color/colorPrimary2"
+            app:strokeWidth="1dp"
             app:layout_constraintTop_toBottomOf="@id/btnWishlist"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

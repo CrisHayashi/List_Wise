@@ -41,14 +41,14 @@
         android:textAllCaps="false"
         android:textStyle="bold"
         android:layout_marginTop="12dp"
-        android:backgroundTint="@color/colorOnBackground"
+        android:backgroundTint="@color/colorSurface"
         android:textColor="@color/colorOnPrimary"
         app:layout_constraintTop_toBottomOf="@id/txtLocationHint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- MAPA (SupportMapFragment) -->
-    <fragment
+    <!-- MAPA (SupportMapFragment) usando FragmentContainerView -->
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mapFragment"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"

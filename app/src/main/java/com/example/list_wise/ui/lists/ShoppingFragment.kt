@@ -1,5 +1,12 @@
 package com.example.list_wise.ui.lists
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +43,26 @@ class ShoppingFragment : Fragment() {
     private lateinit var categoryAdapter: CategoryAdapter
     private val displayCategories = mutableListOf<Category>()
 
+    // Localização
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    // Pedido de permissão de localização
+    private val locationPermissionRequest =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val fineGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
+            val coarseGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
+
+            if (fineGranted || coarseGranted) {
+                obterLocalizacaoAtual()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Permissão de localização negada.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,6 +82,9 @@ class ShoppingFragment : Fragment() {
         // Inicializa DB e repositório
         dbHelper = DatabaseHelper(requireContext())
         repository = ListRepository(dbHelper)
+
+        // Inicializa cliente de localização
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         setupRecyclerView()
         carregarListaParaCompra()
@@ -121,7 +151,6 @@ class ShoppingFragment : Fragment() {
 
             // Carregamos apenas os itens QUE PERTENCEM à lista
             val itensDoBanco = repository.obterItensDaLista(lista.id)
-
             atualizarListaVisual(itensDoBanco)
         } else {
             // Nenhuma lista ativa: mostra texto padrão
@@ -191,8 +220,137 @@ class ShoppingFragment : Fragment() {
             findNavController().popBackStack()
             // ou: findNavController().navigateUp()
         }
+
+        // Botão "Usar minha localização"
+        binding.btnUseLocation.setOnClickListener {
+            solicitarOuObterLocalizacao()
+        }
     }
 
+    /** Verifica permissão e, se tiver OK, busca a localização atual */
+    private fun solicitarOuObterLocalizacao() {
+        val context = requireContext()
+
+        val finePermission = ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+        val coarsePermission = ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+
+        if (finePermission == PackageManager.PERMISSION_GRANTED ||
+            coarsePermission == PackageManager.PERMISSION_GRANTED
+        ) {
+            obterLocalizacaoAtual()
+        } else {
+            locationPermissionRequest.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }
+    }
+
+    /** Usa FusedLocation + Geocoder para preencher o endereço */
+    private fun obterLocalizacaoAtual() {
+        // Confere de novo a permissão – isso deixa o Lint feliz e evita crash se algo mudar
+        val context = requireContext()
+        val finePermission = ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+        val coarsePermission = ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+
+        if (finePermission != PackageManager.PERMISSION_GRANTED &&
+            coarsePermission != PackageManager.PERMISSION_GRANTED
+        ) {
+            Toast.makeText(
+                context,
+                "Permissão de localização não concedida.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        try {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        try {
+                            val geocoder = Geocoder(requireContext(), Locale.getDefault())
+                            val results = geocoder.getFromLocation(
+                                location.latitude,
+                                location.longitude,
+                                1
+                            )
+
+                            if (!results.isNullOrEmpty()) {
+                                val address = results[0]
+                                val linhaEndereco = address.getAddressLine(0) ?: ""
+
+                                // Preenche endereço
+                                binding.editStoreAddress.setText(linhaEndereco)
+
+                                // Se nome do local estiver vazio, sugere algo
+                                if (binding.editStoreName.text.isNullOrBlank()) {
+                                    val nomeLocal =
+                                        address.subLocality
+                                            ?: address.thoroughfare
+                                            ?: address.locality
+                                            ?: "Supermercado"
+                                    binding.editStoreName.setText(nomeLocal)
+                                }
+
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Endereço preenchido pela localização atual.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Não foi possível obter o endereço.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            Toast.makeText(
+                                requireContext(),
+                                "Erro ao converter localização em endereço.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Localização indisponível. Tente novamente.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(
+                        requireContext(),
+                        "Erro ao obter localização.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+        } catch (se: SecurityException) {
+            // Caso extremo: se por algum motivo a permissão for revogada no meio do caminho
+            Toast.makeText(
+                requireContext(),
+                "Sem permissão para acessar localização.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
     private fun finalizarCompra() {
         val lista = currentLista ?: run {
             Toast.makeText(requireContext(), "Nenhuma lista ativa.", Toast.LENGTH_SHORT).show()
@@ -203,11 +361,18 @@ class ShoppingFragment : Fragment() {
         // Usa precoPago (quando houver), senão precoEstimado
         val total = repository.calcularTotalGastoDaLista(lista.id, isHistorico = true)
 
+        // Lê os campos de local e endereço
+        val local = binding.editStoreName.text?.toString()?.trim().orEmpty()
+        val endereco = binding.editStoreAddress.text?.toString()?.trim().orEmpty()
+
+        val localOuNull = local.ifBlank { null }
+        val enderecoOuNull = endereco.ifBlank { null }
+
         val sucesso = repository.finalizarListaEMigrar(
             listaId = lista.id,
             dataFinalizacao = dataHoje,
-            local = null,   // você comentou que não precisa do local
-            endereco = null,
+            local = localOuNull,
+            endereco = enderecoOuNull,
             totalGasto = total
         )
 

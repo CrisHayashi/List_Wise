@@ -36,12 +36,15 @@ class HistoricListAdapter (
         private val txtStatus = itemView.findViewById<TextView>(R.id.txtListStatus)
 
         fun bind(lista: Lista) {
+
+            val context = itemView.context
+
             txtNome.text = lista.nome
-            txtLocal.text = lista.local ?: "Local não informado"
-            txtEndereco.text = lista.endereco ?: "Endereço não informado"
+            txtLocal.text = lista.local ?: context.getString(R.string.list_location_not_informed)
+            txtEndereco.text = lista.endereco ?: context.getString(R.string.list_address_not_informed)
             txtValor.text = currencyFormatter.format(lista.totalGasto)
             txtData.text = lista.dataFinalizacao ?: "-"
-            txtStatus.text = "${lista.quantidadeItens} Itens"
+            txtStatus.text = context.getString(R.string.historic_items_count, lista.quantidadeItens)
 
             // Clique no card chama o callback
             itemView.setOnClickListener {

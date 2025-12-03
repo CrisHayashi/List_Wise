@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Fundo: AGORA ESCURO -->
+    <color name="colorBackground">#000000</color>      <!-- fundo preto -->
+    <color name="colorOnBackground">#FFFFFF</color>    <!-- texto principal branco -->
+
+    <!-- Header / BottomNav -->
+    <color name="colorHeader">#000000</color>          <!-- header preto -->
+    <color name="colorOnHeader">#FFFFFF</color>        <!-- texto/ícone branco -->
+
+    <!-- Superfícies (cards, botões) -->
+    <color name="colorSurface">#121212</color>         <!-- preto um pouco mais claro que o fundo -->
+    <color name="colorOnSurface">#FFFFFF</color>       <!-- texto branco nos cards -->
+
+    <!-- Texto secundário -->
+    <color name="colorSecondaryText">#B0B0B0</color>
+
+    <!-- Erro -->
+    <color name="colorError">#B00020</color>
+    <color name="colorOnError">#000000</color>
+
+    <!-- Textos de EditText -->
+    <color name="colorInputText">#FFFFFF</color>       <!-- texto digitado -->
+    <color name="colorInputHint">#888888</color>       <!-- hint -->
+
+    <color name="colorInputIcon">#FFFFFF</color> <!-- branco pra aparecer no fundo escuro -->
+    <color name="colorInputIcon1">#888888</color>
+
+    <color name="colorLoginBackground">#000000</color>   <!-- continua preto -->
+    <color name="colorLoginCard">#121212</color>         <!-- card um pouco mais claro -->
+
+    <!-- Configurações (cores exclusivas) -->
+    <color name="settingsCardBackground">#000000</color>   <!-- continua preto -->
+    <color name="settingsCardText">#FFFFFF</color>         <!-- continua branco -->
+    <color name="settingsButtonPrimary">#000000</color>
+    <color name="settingsButtonPrimaryText">#FFFFFF</color>
+    <color name="settingsButtonDanger">#B00020</color>
+    <color name="settingsButtonDangerText">#FFFFFF</color>
+</resources>

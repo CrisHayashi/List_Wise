@@ -10,6 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.list_wise.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.list_wise.databinding.FragmentHistoricBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.text.NumberFormat
 
 class HistoricFragment : Fragment() {
 
@@ -39,16 +42,34 @@ class HistoricFragment : Fragment() {
         binding.recyclerViewHistoric.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewHistoric.adapter = adapter
 
-        viewModel.gastos.observe(viewLifecycleOwner) {
-            binding.txtMonthlyExpense.text = "R$ %.2f".format(it)
+        viewModel.gastos.observe(viewLifecycleOwner) { valor ->
+            binding.txtMonthlyExpense.text =
+                getString(R.string.monthly_expense_format, valor)
         }
 
-        viewModel.totalListas.observe(viewLifecycleOwner) {
-            binding.txtCompletedListsCount.text = it.toString()
+        viewModel.totalListas.observe(viewLifecycleOwner) { total ->
+            val formatted = NumberFormat.getIntegerInstance().format(total)
+            binding.txtCompletedListsCount.text = formatted
         }
 
-        viewModel.listasFinalizadas.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewModel.listasFinalizadas.observe(viewLifecycleOwner) { listas ->
+            val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+
+            val listasOrdenadas = listas.sortedByDescending { lista ->
+                val dataStr = lista.dataFinalizacao
+
+                if (dataStr.isNullOrBlank()) {
+                    0L  // se não tiver data, joga pro final
+                } else {
+                    try {
+                        sdf.parse(dataStr)?.time ?: 0L
+                    } catch (e: Exception) {
+                        0L
+                    }
+                }
+            }
+
+            adapter.submitList(listasOrdenadas)
         }
 
         viewModel.itensMaisComprados.observe(viewLifecycleOwner) { itens ->

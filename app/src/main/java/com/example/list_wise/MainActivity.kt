@@ -13,14 +13,60 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Pega o NavHostFragment do layout
+        // NavHostFragment
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        // Configura o BottomNavigationView
+        // BottomNavigationView
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        // Deixa o NavigationUI sincronizar seleção x destino
+        // (ele adiciona o listener de destinationChanged pra marcar o item certo)
         bottomNavigationView.setupWithNavController(navController)
+
+        // Agora controlamos o QUE acontece quando clica em cada item
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.dashboardFragment -> {
+                    // Volta pro Dashboard "raiz"
+                    navController.popBackStack(R.id.dashboardFragment, false)
+                    if (navController.currentDestination?.id != R.id.dashboardFragment) {
+                        navController.navigate(R.id.dashboardFragment)
+                    }
+                    true
+                }
+
+                R.id.historicFragment -> {
+                    navController.popBackStack(R.id.historicFragment, false)
+                    if (navController.currentDestination?.id != R.id.historicFragment) {
+                        navController.navigate(R.id.historicFragment)
+                    }
+                    true
+                }
+
+                R.id.storeLocatorFragment -> {
+                    navController.popBackStack(R.id.storeLocatorFragment, false)
+                    if (navController.currentDestination?.id != R.id.storeLocatorFragment) {
+                        navController.navigate(R.id.storeLocatorFragment)
+                    }
+                    true
+                }
+
+                R.id.settingsFragment -> {
+                    navController.popBackStack(R.id.settingsFragment, false)
+                    if (navController.currentDestination?.id != R.id.settingsFragment) {
+                        navController.navigate(R.id.settingsFragment)
+                    }
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        // (Opcional) Não precisamos de comportamento extra em re-seleção,
+        // então podemos deixar sem setOnItemReselectedListener.
 
         // Toolbar customizada (TextView)
         val titleView = findViewById<TextView>(R.id.txtToolbarTitle)
@@ -34,16 +80,17 @@ class MainActivity : AppCompatActivity() {
                 R.id.storeLocatorFragment -> getString(R.string.title_store_locator)
                 R.id.settingsFragment -> getString(R.string.title_settings)
                 R.id.purchasedListFragment -> getString(R.string.title_purchased_list)
-                else -> getString(R.string.app_name) // fallback
+                else -> getString(R.string.app_name)
             }
             titleView.text = newTitle
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-            val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-            val navController = navHostFragment.navController
-            return navController.navigateUp() || super.onSupportNavigateUp()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
+

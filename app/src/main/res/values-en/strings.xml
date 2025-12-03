@@ -1,16 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Só precisamos traduzir as chaves novas obrigatórias -->
+    <!-- ===================== APP / GENERAL ===================== -->
+    <string name="app_name">List Wise</string>
+    <string name="app_version">List Wise v1.0.3</string>
+    <string name="app_footer">Made with care to make your shopping easier.</string>
+
+    <!-- Logos / Images -->
+    <string name="listwise_image_description">App logo</string>
+    <string name="my_image_description">Footer logo</string>
+    <string name="company_logo_description">Company logo</string>
+    <string name="google_img_desc">Google icon</string>
+    <string name="itech_inspirationalTech">Inspirational Tech</string>
+
+    <!-- ===================== SCREEN / SECTION TITLES ===================== -->
+    <string name="title_dashboard">Menu</string>
+    <string name="title_list">List</string>
+    <string name="title_create_list">Create New List</string>
+    <string name="title_desired_lists">Desired Lists</string>
+    <string name="title_purchased_lists">Purchase History</string>
+    <string name="title_purchased_list">Completed List</string>
+    <string name="title_shopping">Shopping mode</string>
+    <string name="title_historic">History</string>
+    <string name="title_store_locator">Location</string>
+    <string name="title_settings">Settings</string>
+    <string name="dashboard_welcome_generic">Hello!</string>
+
+    <!-- Location screen text -->
     <string name="location_hint">
-        Enable location to see nearby supermarkets.
+        Turn on location to see nearby supermarkets.
+    </string>
+    <string name="location_hint_radius">
+        Showing supermarkets within a radius of %1$d km from your current location.
     </string>
 
+    <!-- ===================== BUTTONS / ACTIONS ===================== -->
+    <string name="btn_create_list">Create list</string>
+    <string name="btn_purchased">Completed lists</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_wishlist">Desired lists</string>
+    <string name="action_go_to_shopping">Go shopping</string>
+    <string name="finish_purchase">Finish purchase</string>
+    <string name="adicionar_item">Add item</string>
+    <string name="expandir_categoria">Expand</string>
     <string name="enable_location">Enable location</string>
+    <string name="edit_list">Edit list</string>
+
+    <!-- ===================== LISTS / ITEMS / PLACEHOLDERS ===================== -->
+    <string name="hint_list_name">List name</string>
+    <string name="hint_search_item">Search item</string>
+    <string name="nome_item">Item name</string>
+    <string name="categoria">Category</string>
+    <string name="hint_item_brand">Brand (optional)</string>
+    <string name="hint_item_price">Price</string>
+    <string name="hint_item_quantity">Quantity</string>
+    <string name="developing_screen_message">Screen under development</string>
+    <string name="hint_item_category">Category (e.g., Grocery, Dairy)</string>
 
     <string name="location_permission_required">
         Location permission is required to show nearby supermarkets.
     </string>
-    <string name="edit_list">Edit list</string>
+
+    <!-- Item icon descriptions -->
+    <string name="desc_add_item">Add item</string>
+    <string name="desc_delete_item">Delete item</string>
+    <string name="desc_edit_item">Edit item</string>
+
+    <!-- ===================== SHOPPING MODE ===================== -->
+    <string name="shopping_list_title_default">My shopping list</string>
+    <string name="shopping_hint">Check items as you buy them.</string>
+
+    <!-- ===================== HISTORY / COMPLETED LIST ===================== -->
+    <!-- Dynamic formats -->
+    <string name="purchased_date_format">Completed on %1$s</string>
+    <string name="purchased_location_format">Location: %1$s</string>
+    <string name="purchased_total_format">Total spent: R$ %.2f</string>
+    <string name="monthly_expense_format">R$ %.2f</string>
+    <string name="historic_items_count">%1$d items</string>
+    <string name="list_location_not_informed">Location not informed</string>
+    <string name="list_address_not_informed">Address not informed</string>
+    <string name="most_purchased_items_format">Most purchased items: %1$s</string>
+    <string name="historic_monthly_expense_label">Spending this month</string>
+    <string name="historic_completed_lists_label">Completed lists</string>
+    <string name="most_purchased_title">Most purchased items</string>
+    <string name="most_purchased_subtitle_hint">Based on your purchase history</string>
+    <string name="historic_no_history">No history yet. Complete some lists to see your stats!</string>
+    <string name="historic_create_list_button">+ Create list</string>
+    <string name="historic_completed_lists_subtitle">Reuse your completed lists</string>
+
+    <!-- Example / static texts -->
+    <string name="purchased_list_title">Monthly list</string>
+    <string name="purchased_finalized_example">Completed on 10/11/2025</string>
+    <string name="purchased_location_label">Location:</string>
+    <string name="purchased_total_example">Total spent: R$ 0.00</string>
+    <string name="purchased_items_title">Purchased items</string>
+
+    <!-- ===================== NAVIGATION / BOTTOM NAV ===================== -->
+    <string name="desc_nav_alarm">Open history</string>
+    <string name="desc_nav_cart">Open cart</string>
+    <string name="desc_nav_list">Open lists</string>
+    <string name="desc_nav_location">Open location</string>
+    <string name="desc_nav_settings">Open settings</string>
+
+    <!-- ===================== LOGIN / SIGN UP ===================== -->
+    <string name="cadastro_text">Sign up</string>
+    <string name="create_account_text">Don\'t have an account?</string>
+    <string name="create_account_btn">Create account</string>
+    <string name="enter_text">Login</string>
+    <string name="login_button">Login</string>
+    <string name="login_google_text">Sign in with Google</string>
+    <string name="login_prompt">Email</string>
+    <string name="password_prompt">Password</string>
+    <string name="forgot_password_text">Forgot your password?</string>
+    <string name="or_text">or</string>
+    <string name="created_account_btn">Already have an account?</string>
+    <string name="login_button1">Log in</string>
+
+    <!-- Login / sign up messages -->
+    <string name="cadastro_error_message">Please fill in all fields.</string>
+    <string name="cadastro_success_message">Sign up completed successfully!</string>
+    <string name="login_empty_message">Fill in all fields.</string>
+    <string name="login_found_message">A user with this email already exists.</string>
+    <string name="login_success_message">Login successful!</string>
+    <string name="login_error_message">Incorrect username or password.</string>
+
+    <!-- ===================== SETTINGS / PREFERENCES ===================== -->
+    <string name="config_subtitle">Customize your experience in the app</string>
+
+    <string name="appearance">🌗 Appearance</string>
+    <string name="language">🌍 Language</string>
+    <string name="choose_language">Portuguese</string>
+    <string name="choose_theme">System</string>
+
+    <string name="notifications_push">🔔 Push notifications</string>
+    <string name="offline_mode">🌐 Offline mode</string>
+    <string name="clear_all_data">Clear all data</string>
+    <string name="export_data">Export data</string>
+    <string name="logout">Logout</string>
+
+    <!-- Generic icons -->
+    <string name="icon_expand_description">Icon to expand options</string>
+
+    <string name="hint_name">Name</string>
+    <string name="hint_sexo">Gender</string>
+    <string name="hint_profissao">Profession</string>
+    <string name="hint_idade">Age</string>
+
+    <string name="hint_store_name">Place of purchase (e.g., Atacadão)</string>
+    <string name="hint_store_address">Address (optional)</string>
+    <string name="use_current_location">Use my location</string>
+
+    <!-- ===================== MESSAGES / SNACKBARS ===================== -->
+    <string name="snackbar_theme_changed">Theme changed to: %1$s</string>
+    <string name="snackbar_language_changed">Language set to: %1$s</string>
+
+    <string name="snackbar_notifications_on">Notifications enabled</string>
+    <string name="snackbar_notifications_off">Notifications disabled</string>
+
+    <string name="snackbar_offline_on">Offline mode enabled</string>
+    <string name="snackbar_offline_off">Offline mode disabled</string>
+
+    <string name="snackbar_exporting_data">Exporting data…</string>
+    <string name="snackbar_settings_reset">Settings reset!</string>
+    <string name="snackbar_logout_success">Logout successful</string>
+
+    <string name="dashboard_welcome_named">Hello, %1$s!</string>
 
 </resources>
+
